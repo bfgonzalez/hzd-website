@@ -22,5 +22,9 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.4"
   },
-  "proxy": "https://localhost:8080"
+  "proxy": "https://localhost:8080",
+  "engines": {
+    "npm": "6.9.0",
+    "node": "10.16.1"
+  }
 }
