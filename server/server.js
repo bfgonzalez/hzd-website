@@ -5,11 +5,11 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // setup route
 app.get('/', (request, response) => {
-  response.sendFile(path.join(__dirname, '../react-ui/build', 'index.html'));
+  response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // start server
