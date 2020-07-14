@@ -9,7 +9,22 @@ const db = require('./db/queries');
 const app = express();
 const port = process.env.PORT || 8080;
 
+const cors = require('cors');
+// const corsOptions = {
+//   origin: process.env.API_URL
+// }
+
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+// enable CORS
+// app.use(cors({origin: `${process.env.API_URL}`}));
+// app.use(cors({origin: 'http://localhost:3000/'}));
+app.use((request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*');
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+})
+
 
 // setup routes
 app.get('/', (request, response) => {
