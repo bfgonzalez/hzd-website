@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Avenir&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap');
+// If needed, change your variables before importing Bulma
+
+//Initial font variable
+$family-primary: "Avenir", sans-serif;
+$family-secondary: "Montserrat", sans-serif;
+
+// Initial variables
+$blue: #2ec4b6;
+$black: #424242;
+$grey: #9A9595;
+$white: #FFFFFF;
+
+$custom-colors: $blue, $black, $grey, $white;
+
+// Derived variables
+$primary: $blue;
+$text: $black;
+$footer-background-color: $white;
+$footer-padding: 0;
+$link: $primary;
+
+// For margin and padding
+$spacer: 0.6rem;
+
+// landing page
+.hero-section {
+  background: url('../assets/hzd-bg.jpg');
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #282c34;
+}
+
+@import "../../node_modules/bulma/bulma.sass";

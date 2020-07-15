@@ -1,9 +1,8 @@
 import React, { useState, useEffect} from 'react';
-import hzdLogo from './assets/hzd-logo.png';
-
-import './App.css';
 
 import axios from 'axios';
+import '../../styles/variables.scss';
+import hzdLogo from '../../assets/hzd-logo.png';
 
 require('dotenv').config()
 
@@ -12,7 +11,6 @@ const App = () => {
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}`)
-    // axios.get(`https://localhost:8080/machines`)
     .then(response => {
       console.log(response.data[0])
       setMachines(response.data)
@@ -24,9 +22,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="hero-section">
         <img src={hzdLogo} className="App-logo" alt="logo" />
-        <p>Welcome to the Horizon Zero Dawn Wiki! Here's a list of machines from the database:</p>
+        <div className="buttons">
+          <a className="button is-link has-text-weight-bold mt-5">View Machine Catalogue</a>
+        </div>
         <ol>
           {machines.map((machine, index) => {
             return (
@@ -34,7 +34,7 @@ const App = () => {
             )
           })}
         </ol>
-      </header>
+      </div>
     </div>
   )
 }
