@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import logo from './logo.svg';
+import hzdLogo from './assets/hzd-logo.png';
+
 import './App.css';
 
 import axios from 'axios';
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={hzdLogo} className="App-logo" alt="logo" />
         <p>Welcome to the Horizon Zero Dawn Wiki! Here's a list of machines from the database:</p>
         <ol>
           {machines.map((machine, index) => {
