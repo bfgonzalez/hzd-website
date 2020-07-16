@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import Table from '../Table/Table';
 
 const machineHeaders = ['Name', 'Size', 'Origin', 'Override', 'Class', 'Machine Sites', 'Weakness', 'Strength', 'Weak Points'];
 
-const Machines = ( ) => {
+const Machines = () => {
   const [machines, setMachines] = useState([])
 
   useEffect(() => {
@@ -14,7 +15,11 @@ const Machines = ( ) => {
   }, [])
 
   return (
-    <Table headers={machineHeaders} data={machines}/>
+    <div>
+      <h1 className='title'>Machines</h1>
+      <Table headers={machineHeaders} data={machines}/>
+    </div>
+
   )
 }
 
