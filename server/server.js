@@ -10,9 +10,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const cors = require('cors');
-// const corsOptions = {
-//   origin: process.env.API_URL
-// }
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
