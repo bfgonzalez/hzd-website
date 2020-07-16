@@ -8,14 +8,16 @@ $family-secondary: "Montserrat", sans-serif;
 
 // Initial variables
 $blue: #2ec4b6;
+$yellow: #f8961e;
 $black: #424242;
 $grey: #9A9595;
 $white: #FFFFFF;
 
-$custom-colors: $blue, $black, $grey, $white;
+$custom-colors: $blue, $black, $grey, $white, $yellow;
 
 // Derived variables
 $primary: $blue;
+$secondary: $yellow;
 $text: $black;
 $footer-background-color: $white;
 $footer-padding: 0;

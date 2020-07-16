@@ -12,7 +12,10 @@ const Home = () => {
       <img src={hzdLogo} alt="logo" />
       <div className="buttons">
         <Link to="/machines">
-          <a className="button is-link has-text-weight-bold mt-5">View Machine Catalogue</a>
+          <button className="button is-primary has-text-weight-bold mt-5 mr-4">View Machine Catalogue</button>
+        </Link>
+        <Link to="/admin">
+          <button className="button is-black has-text-white has-text-weight-bold mt-5">Admin Login</button>
         </Link>
       </div>
     </div>
