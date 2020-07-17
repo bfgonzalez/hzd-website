@@ -28,7 +28,8 @@ $spacer: 0.6rem;
 
 // landing page
 .hero-section {
-  background: url('../assets/hzd-bg.jpg');
+  background: url('../assets/hzd-bg.png');
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
