@@ -36,7 +36,27 @@ $spacer: 0.6rem;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #282c34;
+  color: $white;
 }
+
+// navbar
+$navbar-burger-color: $white;
+$navbar-dropdown-background-color: $blue;
+
+.navbar {
+  &.is-transparent {
+  background-color: transparent;
+  background-image: none;
+  }
+}
+
+.navbar .is-active {
+  background-color: $black;
+}
+
+.navbar .is-active a:hover {
+  background-color: $primary;
+}
+
 
 @import "../../node_modules/bulma/bulma.sass";
