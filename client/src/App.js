@@ -5,7 +5,7 @@ import Layout from './components/Template/Layout';
 import Home from './components/Home/Home';
 import Machines from './components/Machines/Machines';
 import Login from './components/Admin/Login';
-import Admin from './components/Admin/Admin';
+import AddMachine from './components/Admin/AddMachine';
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
           <Route exact path='/' component={Home}/>
           <Route path='/machines' component={Machines}/>
           <Route path='/admin' component={Login}/>
-          <Route path={`${process.env.REACT_APP_ADMIN_URL}`} component={Admin}/>
+          <Route path={`${process.env.REACT_APP_ADMIN_URL}`} component={AddMachine}/>
         </Switch>
       {/* </Layout> */}
     </BrowserRouter>

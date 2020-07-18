@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import Navbar from '../Template/Navbar';
 import '../../styles/variables.scss';
 import hzdLogo from '../../assets/hzd-logo.png';
-import Navbar from '../Template/Navbar';
+
 
 require('dotenv').config()
 

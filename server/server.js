@@ -33,7 +33,8 @@ app.use(bodyParser.urlencoded({
 }))
 
 // set endpoints
-app.get('/api/machines', db.getMachines)
+app.get('/api/machines', db.getMachines);
+app.post('/api/machines', db.addMachine);
 
 // start server
 app.listen(port, (request, response) => {
