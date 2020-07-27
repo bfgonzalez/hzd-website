@@ -4,8 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const db = require('./db/queries');
-
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -17,11 +15,12 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*');
   response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  response.header('Content-Type', 'application/json');
   next();
 })
 
-
-// setup routes
+// setup routes, require routes into the application
+require('./routes')(app);
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
@@ -29,12 +28,8 @@ app.get('/', (request, response) => {
 // create a REST API by returning data from database in JSON format
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
-  extended: true,
+  extended: false,
 }))
-
-// set endpoints
-app.get('/api/machines', db.getMachines);
-app.post('/api/machines', db.addMachine);
 
 // start server
 app.listen(port, (request, response) => {
