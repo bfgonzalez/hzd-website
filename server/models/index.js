@@ -20,6 +20,10 @@ if (config.use_env_variable) {
 if (process.env.DATABASE_URL) {
   // applicatioin is executed on Heroku => use postgres database
   sequelize = new Sequelize(process.env.DATABASE_URL, {
+    define: {
+      'createdAt': 'created_at',
+      'updatedAt': 'updated_at'
+    },
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {

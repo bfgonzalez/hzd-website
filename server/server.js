@@ -19,17 +19,14 @@ app.use((request, response, next) => {
   next();
 })
 
+// create a REST API by returning data from database in JSON format
+app.use(bodyParser.json())
+
 // setup routes, require routes into the application
 require('./routes')(app);
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
-
-// create a REST API by returning data from database in JSON format
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  extended: false,
-}))
 
 // start server
 app.listen(port, (request, response) => {

@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
+import moment from "moment";
 
 import "../../styles/variables.scss";
-
-const qs = require("qs");
 
 const AddMachine = () => {
   const handleSubmit = event => {
     event.preventDefault();
+
+    const currentDate = new Date();
 
     let data = {
       name: "Grazer",
@@ -18,23 +19,43 @@ const AddMachine = () => {
       machine_sites: 11,
       weakness: "None",
       strength: "None",
-      weak_points: "Eyes, Rotor Blades (x2), Blaze Canisters (x4)"
+      weak_points: "Eyes, Rotor Blades (x2), Blaze Canisters (x4)",
+      created_at: moment(currentDate).format("MM-DD-YYYY"),
+      updated_at: moment(currentDate).format("MM-DD-YYYY")
     }
 
     let formData = new FormData();
 
     // append all key-value pairs from "data" object to FormData()
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
+    // for (const key in data) {
+    //   formData.append(key, data[key]);
+    // }
 
-    axios.post(process.env.REACT_APP_API_URL, formData, {
+    axios.post(process.env.REACT_APP_API_URL, data, {
       headers: {
         "content-type": "application/json",
       }
     })
     .then(response => console.log(response.data))
     .catch(error => console.log(error))
+
+    // axios.post(process.env.REACT_APP_API_URL, {
+    //   name: data.name,
+    //   size: data.size,
+    //   origin: data.origin,
+    //   override: data.override,
+    //   machine_class: data.machine_class,
+    //   machine_sites: data.machine_sites,
+    //   weakness: data.weakness,
+    //   strength: data.strength,
+    //   weak_points: data.weak_points
+    // }, {
+    //   headers: {
+    //     "content-type": "application/json",
+    //   }
+    // })
+    //   .then(response => console.log(response.data))
+    //   .catch(error => console.log(error))
   }
 
 
