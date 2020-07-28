@@ -3,22 +3,23 @@ const models = require('../models');
 module.exports = {
   // add machine to database
   create(request, response) {
+    const { name, size, origin, override, machine_class, machine_sites, weakness, strength, weak_points, id, created_at, updated_at } = request.body;
     return models.machines
       .create({
-        name: request.body.name,
-        size: request.body.size,
-        origin: request.body.origin,
-        override: request.body.override,
-        machine_class: request.body.machine_class,
-        machine_sites: request.body.machine_sites,
-        weakness: request.body.weakness,
-        strength: request.body.strength,
-        weak_points: request.body.weak_points,
-        id: request.body.id,
-        created_at: request.body.created_at,
-        updated_at: request.body.updated_at
+        name: name,
+        size: size,
+        origin: origin,
+        override: override,
+        machine_class: machine_class,
+        machine_sites: machine_sites,
+        weakness: weakness,
+        strength: strength,
+        weak_points: weak_points,
+        id: id,
+        created_at: created_at,
+        updated_at: updated_at
       })
-        .then(machine => response.status(201).send(machine))
+        .then(machine => response.json(machine))
         .catch(error => response.status(400).send(error.message));
   },
 
@@ -31,10 +32,4 @@ module.exports = {
       .then(machines => response.status(200).send(machines))
       .catch(error => response.status(400).send(error.message))
   },
-
-  // update existing machine in database
-  // update(request, response) {
-  //   return models.machines
-  //     .
-  // }
 };
