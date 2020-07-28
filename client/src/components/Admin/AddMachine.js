@@ -1,55 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import moment from "moment";
 
-import '../../styles/variables.scss';
+import "../../styles/variables.scss";
 
 const AddMachine = () => {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
+  const currentDate = new Date();
 
-  // const history = useHistory();
+  const [values, setValues] = useState({
+    name: "",
+    size: "",
+    origin: "",
+    override: "",
+    machine_class: "",
+    machine_sites: 0,
+    weakness: "",
+    strength: "",
+    weak_points: "",
+    created_at: moment(currentDate).format("MM-DD-YYYY"),
+    updated_at: moment(currentDate).format("MM-DD-YYYY")
+  })
 
-  // const handleSubmit = event => {
-  //   event.preventDefault()
-  //   if (username === `${process.env.REACT_APP_USERNAME}` && password === `${process.env.REACT_APP_PASSWORD}`) {
-  //     history.push(`${process.env.REACT_APP_ADMIN_URL}`)
-  //   } else {
-  //     alert("you're not my master!")
-  //   }
-  // }
+  const handleInputChange = event => {
+    const { name, value } = event.target
+    setValues({...values, [name]: value})
+  }
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    let data = {
-      name: 'Grazer',
-      size: 'Small',
-      origin: 'GAIA',
-      override: 'Cauldron SIGMA',
-      machine_class: 'Acquisition',
-      machine_sites: 11,
-      weakness: 'None',
-      strength: 'None',
-      weak_points: 'Eyes, Rotor Blades (x2), Blaze Canisters (x4)'
-    }
+    let data = values;
 
-    axios.post(process.env.REACT_APP_API_URL, data)
-    .then(response => console.log(response))
+    axios.post(process.env.REACT_APP_API_URL, data, {
+      headers: {
+        "content-type": "application/json",
+      }
+    })
+    .then(response => {
+      console.log(values);
+      console.log(response)
+    })
     .catch(error => console.log(error))
   }
 
 
   return (
     <div>
-      <h1 className='title'>Add Machine</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="title">Add Machine</h1>
+      <form onSubmit={handleSubmit} name="addMachinesForm">
         <div className="field">
           <div className="control">
-            <input className="input is-primary" name="name" type="text" placeholder="Name"/>
-            <input className="input is-primary" name="size" type="text" placeholder="Size"/>
+            <input className="input is-primary" name="name" type="text" onChange={handleInputChange} value={values.name} placeholder="Name"/>
+            <input className="input is-primary" name="size" type="text" onChange={handleInputChange} value={values.size} placeholder="Size"/>
+            <input className="input is-primary" name="origin" type="text" onChange={handleInputChange} value={values.origin} placeholder="Origin"/>
+            <input className="input is-primary" name="override" type="text" onChange={handleInputChange} value={values.override} placeholder="Override"/>
+            <input className="input is-primary" name="machine_class" type="text" onChange={handleInputChange} value={values.machine_class} placeholder="Machine Class"/>
+            <input className="input is-primary" name="machine_sites" type="number" onChange={handleInputChange} value={values.machine_sites} placeholder="Machine Sites"/>
+            <input className="input is-primary" name="weakness" type="text" onChange={handleInputChange} value={values.weakness} placeholder="Weakness"/>
+            <input className="input is-primary" name="strength" type="text" onChange={handleInputChange} value={values.strength} placeholder="Strength"/>
+            <input className="input is-primary" name="weak_points" type="text" onChange={handleInputChange} value={values.weak_points} placeholder="Weak Points"/>
           </div>
         </div>
-        <button className='button is-primary has-text-weight-bold' type='submit' onClick={handleSubmit}>Add Machine</button>
+        <button className="button is-primary has-text-weight-bold" type="submit" onClick={handleSubmit}>Add Machine</button>
       </form>
     </div>
   )
