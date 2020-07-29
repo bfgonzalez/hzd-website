@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 import "../../styles/variables.scss";
 
 const AddMachine = () => {
   const currentDate = new Date();
+  const history = useHistory();
 
   const [values, setValues] = useState({
     name: "",
@@ -37,8 +39,9 @@ const AddMachine = () => {
       }
     })
     .then(response => {
-      console.log(values);
-      console.log(response)
+      console.log(response.data);
+      alert(`${response.data.name} has been added to the machines database!`)
+      history.push('/machines');
     })
     .catch(error => console.log(error))
   }
