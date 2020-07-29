@@ -23,7 +23,7 @@ module.exports = {
         .catch(error => response.status(400).send(error.message));
   },
 
-  // list all machines in database
+  // list all machines in database (excluding id, create_at & updated_at)
   list(request, response) {
     return models.machines
       .findAll({
