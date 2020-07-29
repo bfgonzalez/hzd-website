@@ -9,6 +9,20 @@ const port = process.env.PORT || 8080;
 
 const cors = require('cors');
 
+app.use(cors())
+
+// whitelist for cors
+const whitelist = ['http://hzd-website.herokuapp.com/', 'http://localhost:3000/']
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // enable CORS
