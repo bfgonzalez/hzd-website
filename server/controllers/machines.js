@@ -20,7 +20,7 @@ module.exports = {
         updated_at: updated_at
       })
         .then(machine => response.json(machine))
-        .catch(error => response.status(400).send(error.message));
+        .catch(error => console.log(error));
   },
 
   // list all machines in database (excluding id, create_at & updated_at)
