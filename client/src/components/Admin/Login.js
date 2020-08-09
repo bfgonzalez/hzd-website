@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import Layout from "../Template/Layout";
+
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const history = useHistory();
 
@@ -12,24 +14,30 @@ const Login = () => {
     if (username === `${process.env.REACT_APP_USERNAME}` && password === `${process.env.REACT_APP_PASSWORD}`) {
       history.push(`${process.env.REACT_APP_ADMIN_URL}`)
     } else {
-      alert("you're not my master!")
+      alert("unauthorized user")
     }
   }
 
 
   return (
-    <div>
-      <h1 className='title'>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="field">
-          <div className="control">
-            <input className="input is-primary" name="username" type="text" placeholder="Username" onChange={event => setUsername(event.target.value)}/>
-            <input className="input is-primary" name="password" type="password" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
+    <Layout>
+      <div className="login-section">
+        <h1 className="title has-text-white">Login</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="field">
+            <div className="control">
+              <input className="input is-primary" name="username" type="text" placeholder="Username" onChange={event => setUsername(event.target.value)}/>
+            </div>
           </div>
-        </div>
-        <button className='button is-primary has-text-weight-bold' type='submit'>Login</button>
-      </form>
-    </div>
+          <div className="field">
+            <div className="control">
+              <input className="input is-primary" name="password" type="password" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
+            </div>
+          </div>
+          <button className="button is-primary has-text-weight-bold" type="submit">Login</button>
+        </form>
+      </div>
+    </Layout>
   )
 }
 
