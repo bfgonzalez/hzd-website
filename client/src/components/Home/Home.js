@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import Navbar from '../Template/Navbar';
+import Layout from '../Template/Layout';
+
 import '../../styles/variables.scss';
 import hzdLogo from '../../assets/hzd-logo.png';
 
@@ -10,8 +11,7 @@ require('dotenv').config()
 
 const Home = () => {
   return (
-    <>
-      <Navbar/>
+    <Layout>
       <div className="hero-section">
         <img src={hzdLogo} alt="logo" />
         <div className="buttons">
@@ -23,7 +23,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

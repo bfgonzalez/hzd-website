@@ -26,11 +26,27 @@ $link: $primary;
 // For margin and padding
 $spacer: 0.6rem;
 
+// navbar
+$navbar-burger-color: $white;
+$navbar-dropdown-background-color: $blue;
+
+.navbar .is-active {
+  background-color: $black;
+}
+
+.navbar a:hover {
+  border-bottom: $primary;
+}
+
+.navbar .is-active a:hover {
+  background-color: $primary;
+}
+
 // landing page
 .hero-section {
   background: url('../assets/hzd-bg.png');
   background-size: cover;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,23 +55,34 @@ $spacer: 0.6rem;
   color: $white;
 }
 
-// navbar
-$navbar-burger-color: $white;
-$navbar-dropdown-background-color: $blue;
-
-.navbar {
-  &.is-transparent {
-  background-color: transparent;
-  background-image: none;
-  }
+// pages for machines, login, add machine
+.machines-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.navbar .is-active {
-  background-color: $black;
+.login-section {
+  height: 100vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  margin: 0 auto;
 }
 
-.navbar .is-active a:hover {
-  background-color: $primary;
+.add-machine-section {
+  height: auto;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 8rem 0;
+  margin: 0 auto;
 }
 
 

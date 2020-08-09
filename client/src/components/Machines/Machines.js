@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Layout from '../Template/Layout';
 import Table from '../Template/Table';
 
 const machineHeaders = ['Name', 'Size', 'Origin', 'Override', 'Class', 'Machine Sites', 'Weakness', 'Strength', 'Weak Points'];
@@ -15,10 +16,12 @@ const Machines = () => {
   }, [])
 
   return (
-    <div>
-      <h1 className='title'>Machines</h1>
-      <Table headers={machineHeaders} data={machines}/>
-    </div>
+    <Layout>
+      <div className="machines-section">
+        <h1 className="mt-5 has-text-white title">Machine Catalogue</h1>
+        <Table headers={machineHeaders} data={machines}/>
+      </div>
+    </Layout>
 
   )
 }
