@@ -46,6 +46,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    explosive_components: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     created_at: {
       allowNull: false,
       type: DataTypes.DATE

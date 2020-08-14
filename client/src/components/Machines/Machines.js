@@ -4,7 +4,7 @@ import axios from 'axios';
 import Layout from '../Template/Layout';
 import Table from '../Template/Table';
 
-const machineHeaders = ['Name', 'Size', 'Origin', 'Override', 'Class', 'Machine Sites', 'Weakness', 'Strength', 'Weak Points'];
+const machineHeaders = ['Name', 'Size', 'Origin', 'Override', 'Class', 'Machine Sites', 'Weakness', 'Strength', 'Weak Points', 'Explosive Components'];
 
 const Machines = () => {
   const [machines, setMachines] = useState([])
@@ -36,6 +36,7 @@ const Machines = () => {
       }
     })
     .catch(error => console.log(error))
+    // eslint-disable-next-line
   }, [searchTerm])
 
   const handleInputChange = event => {
@@ -45,7 +46,7 @@ const Machines = () => {
   return (
     <Layout>
       <div className="machines-section">
-        <h1 className="mt-5 has-text-white title">Machine Catalogue</h1>
+        <h1 className="mt-6 pt-6 has-text-white title">Machine Catalogue</h1>
         <div className="field">
           <div className="control">
             <input className="input is-primary" name="search" type="text" onChange={handleInputChange} value={searchTerm} placeholder="Search Machines"/>
