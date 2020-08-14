@@ -25,7 +25,7 @@ const Machines = () => {
           let values = Object.values(machine); // get values of each machine object
 
           for (let value of values) {
-            if(value.toString().toLowerCase().includes(search)) {
+            if(value !== null && value.toString().toLowerCase().includes(search)) {
               // if any of the values include the search term, push the machine into the filteredMachines array
               filteredMachines.push(machine);
               break; // break out of the loop as soon as the condition is met the first time

@@ -12,7 +12,7 @@ const TableRow = ({ tableCells }) => {
 
 const Table = ({ headers, data }) => {
   return (
-    <table className='table'>
+    <table className='table is-fullwidth'>
       <thead>
         <tr>
           {headers.map((header, index) => (
