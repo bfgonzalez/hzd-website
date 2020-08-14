@@ -20,6 +20,7 @@ const AddMachine = () => {
     weakness: "",
     strength: "",
     weak_points: "",
+    explosive_components: "",
     created_at: moment(currentDate).format("MM-DD-YYYY"),
     updated_at: moment(currentDate).format("MM-DD-YYYY")
   })
@@ -105,6 +106,12 @@ const AddMachine = () => {
             <div className="control">
               <label for="weak_points" className="has-text-white">Weak Points</label>
               <input className="input is-primary" name="weak_points" type="text" onChange={handleInputChange} value={values.weak_points} placeholder="Weak Points"/>
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <label for="explosive_components" className="has-text-white">Explosive Components</label>
+              <input className="input is-primary" name="explosive_components" type="text" onChange={handleInputChange} value={values.explosive_components} placeholder="Explosive Components"/>
             </div>
           </div>
           <button className="button is-primary has-text-weight-bold" type="submit" onClick={handleSubmit}>Add Machine</button>
