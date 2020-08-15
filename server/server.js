@@ -28,8 +28,12 @@ app.use(bodyParser.json())
 // setup routes, require routes into the application
 require('./routes')(app);
 // handle every other route with index.html
-app.get('/*', (request, response) => {
-  response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+app.get('*', (request, response) => {
+  let url = path.join(__dirname, '../client/build', 'index.html');
+  if (!url.startsWith(`/${process.env.APP_URL}/`)) {
+    url = url.substring(1);
+    response.sendFile(url);
+  }
 });
 
 // start server
