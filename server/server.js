@@ -30,7 +30,7 @@ require('./routes')(app);
 // handle every other route with index.html
 app.get('*', (request, response) => {
   let url = path.join(__dirname, '../client/build', 'index.html');
-  if (!url.startsWith(`/${process.env.APP_URL}/`)) {
+  if (!url.startsWith(`${process.env.APP_URL}`)) {
     url = url.substring(1);
     response.sendFile(url);
   }
