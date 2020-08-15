@@ -10,14 +10,14 @@ import AddMachine from './components/Admin/AddMachine';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/">
+    <StaticRouter basename="/">
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route path='/machines' component={Machines}/>
         <Route path='/admin' component={Login}/>
         <Route path={`${process.env.REACT_APP_ADMIN_URL}`} component={AddMachine}/>
       </Switch>
-    </BrowserRouter>
+    </StaticRouter>
   )
 }
 
