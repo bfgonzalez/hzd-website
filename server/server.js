@@ -11,6 +11,7 @@ const cors = require('cors');
 
 app.use(cors())
 
+// serve static assets normally
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // enable CORS
@@ -26,7 +27,8 @@ app.use(bodyParser.json())
 
 // setup routes, require routes into the application
 require('./routes')(app);
-app.get('/', (request, response) => {
+// handle every other route with index.html
+app.get('*', (request, response) => {
   response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
