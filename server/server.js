@@ -31,7 +31,7 @@ require('./routes')(app);
 app.get('*', (request, response) => {
   let url = path.join(__dirname, '../client/build', 'index.html');
   if (!url.startsWith(`${process.env.APP_URL}`)) {
-    url = url.substring(1);
+    // url = url.substring(1);
     response.sendFile(url);
   }
 });
