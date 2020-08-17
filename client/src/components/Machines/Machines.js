@@ -3,10 +3,11 @@ import axios from 'axios';
 
 import Layout from '../Template/Layout';
 import Table from '../Template/Table';
+import ButtonLink from '../Template/ButtonLink';
 
 const machineHeaders = ['Name', 'Size', 'Origin', 'Override', 'Class', 'Machine Sites', 'Weakness', 'Strength', 'Weak Points', 'Explosive Components'];
 
-const Machines = () => {
+const Machines = ({ isAdmin }) => {
   const [machines, setMachines] = useState([])
   const [searchTerm, setSearchTerm] = useState("");
   const filteredMachines = [];
@@ -45,9 +46,16 @@ const Machines = () => {
 
   return (
     <Layout>
-      <div className="machines-section">
-        <h1 className="mt-6 pt-6 has-text-white title">Machine Catalogue</h1>
-        <div className="field">
+      <div className="machines-section pt-6">
+        <h1 className="pt-6 has-text-white title is-inline">Machine Catalogue</h1>
+        {isAdmin &&
+            <div className="field is-grouped is-pulled-right">
+              <ButtonLink text="Add Machine" color="primary" link="/admin/add-machine"/>
+              <ButtonLink text="Edit Machine" color="warning" link="/admin/edit-machine"/>
+              <ButtonLink text="Delete Machine" color="danger" link="/admin/delete-machine"/>
+            </div>
+        }
+        <div className="field mt-4">
           <div className="control">
             <input className="input is-primary" name="search" type="text" onChange={handleInputChange} value={searchTerm} placeholder="Search Machines"/>
           </div>
