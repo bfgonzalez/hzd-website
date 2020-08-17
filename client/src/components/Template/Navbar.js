@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className={classnames("navbar-menu", isActive === true && "is-active")} data-target="navbar">
         <div id="navbar" className="navbar-end is-size-5 has-text-centered">
           <Link className="navbar-item has-text-white has-text-weight-bold" to="/machines">Machines</Link>
-          <Link className="navbar-item has-text-white has-text-weight-bold" to="/admin">Admin</Link>
+          <Link className="navbar-item has-text-white has-text-weight-bold" to="/admin/login">Admin</Link>
         </div>
       </div>
     </nav>

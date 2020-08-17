@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 
 import Layout from '../Template/Layout';
+import ButtonLink from '../Template/ButtonLink';
 
 import '../../styles/variables.scss';
 import hzdLogo from '../../assets/hzd-logo.png';
@@ -14,13 +14,9 @@ const Home = () => {
     <Layout>
       <div className="hero-section">
         <img src={hzdLogo} alt="logo" />
-        <div className="buttons">
-          <Link to="/machines">
-            <button className="button is-primary has-text-weight-bold mt-5 mr-4">View Machine Catalogue</button>
-          </Link>
-          <Link to="/admin">
-            <button className="button is-black has-text-white has-text-weight-bold mt-5">Admin Login</button>
-          </Link>
+        <div className="field is-grouped mt-5">
+          <ButtonLink text="View Machine Catalogue" color="primary" link="/machines"/>
+          <ButtonLink text="Admin Login" color="black" link="/admin/login"/>
         </div>
       </div>
     </Layout>
