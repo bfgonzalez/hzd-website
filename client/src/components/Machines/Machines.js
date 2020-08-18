@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import Loader from "react-loader-spinner"
 
 import Layout from "../Template/Layout"
 import Table from "../Template/Table"
@@ -21,12 +22,16 @@ const machineHeaders = [
 const Machines = ({ isAdmin }) => {
 	const [machines, setMachines] = useState([])
 	const [searchTerm, setSearchTerm] = useState("")
+	const [isLoading, setLoading] = useState(true)
 	const filteredMachines = []
 
 	useEffect(() => {
 		axios
 			.get(`${process.env.REACT_APP_API_URL}`)
 			.then((response) => {
+				// remove loading indicator after data has been fetched
+				setLoading(false)
+
 				// on initial page load, or if search bar is empty, display full list of machines
 				if (searchTerm === "") {
 					setMachines(response.data)
@@ -94,7 +99,13 @@ const Machines = ({ isAdmin }) => {
 						/>
 					</div>
 				</div>
-				<Table headers={machineHeaders} data={machines} />
+				{isLoading ? (
+					<div className="loading-indicator columns is-centered is-vcentered">
+						<Loader type="Oval" color="#29cdfb" height={100} width={100} />
+					</div>
+				) : (
+					<Table headers={machineHeaders} data={machines} />
+				)}
 			</div>
 		</Layout>
 	)

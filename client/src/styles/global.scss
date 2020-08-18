@@ -6,73 +6,73 @@
 // "m-0" --> no margin; "p-0" --> no padding
 // "m-1" --> smallest margin
 @for $i from 0 through 12 {
-  .m-#{$i},  // margin all around
+	.m-#{$i},  // margin all around
   .mx-#{$i}, // margin for both left and right
   .mr-#{$i} {
-    // margin-right
-    margin-right: $spacer * $i !important;
-  }
+		// margin-right
+		margin-right: $spacer * $i !important;
+	}
 
-  .m-#{$i},  // margin all around
+	.m-#{$i},  // margin all around
   .mx-#{$i}, // margin for both left and right
   .ml-#{$i} {
-    // margin-left
-    margin-left: $spacer * $i !important;
-  }
+		// margin-left
+		margin-left: $spacer * $i !important;
+	}
 
-  .m-#{$i},   // margin for all around
+	.m-#{$i},   // margin for all around
   .my-#{$i},  // margin for both top and bottom
   .mt-#{$i} {
-    // margin-top
-    margin-top: $spacer * $i !important;
-  }
+		// margin-top
+		margin-top: $spacer * $i !important;
+	}
 
-  .m-#{$i},  // margin for all around
+	.m-#{$i},  // margin for all around
   .my-#{$i}, // margin for both top and bottom
   .mb-#{$i} {
-    // margin-bottom
-    margin-bottom: $spacer * $i !important;
-  }
+		// margin-bottom
+		margin-bottom: $spacer * $i !important;
+	}
 
-  .p-#{$i},  // padding for all around
+	.p-#{$i},  // padding for all around
   .px-#{$i}, // padding for both left and right
   .pr-#{$i} {
-    // padding-right
-    padding-right: $spacer * $i !important;
-  }
+		// padding-right
+		padding-right: $spacer * $i !important;
+	}
 
-  .p-#{$i},  // padding for all around
+	.p-#{$i},  // padding for all around
   .px-#{$i}, // padding for both top and bottom
   .pl-#{$i} {
-    // padding-left
-    padding-left: $spacer * $i !important;
-  }
+		// padding-left
+		padding-left: $spacer * $i !important;
+	}
 
-  .p-#{$i}, // padding for all around
+	.p-#{$i}, // padding for all around
   .py-#{$i}, // padding for both top and bottom
   .pt-#{$i} {
-    // padding-top
-    padding-top: $spacer * $i !important;
-  }
+		// padding-top
+		padding-top: $spacer * $i !important;
+	}
 
-  .p-#{$i}, // padding for all around
+	.p-#{$i}, // padding for all around
   .py-#{$i}, // padding for both top and bottom
   .pb-#{$i} {
-    // padding-bottom
-    padding-bottom: $spacer * $i !important;
-  }
+		// padding-bottom
+		padding-bottom: $spacer * $i !important;
+	}
 }
 
 form {
-  flex: 1;
+	flex: 1;
 }
 
 .control label {
-  font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 // vertically centers content of section on desktop and mobile
 .full-height {
-  min-height: 100vh;
-  display: flex;
+	min-height: 100vh;
+	display: flex;
 }
