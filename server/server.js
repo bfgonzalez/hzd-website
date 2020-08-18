@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const history = require('connect-history-api-fallback');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -10,9 +11,10 @@ const port = process.env.PORT || 8080;
 const cors = require('cors');
 
 app.use(cors())
+app.use(history());
 
 // serve static assets normally
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../client/build/')));
 
 // enable CORS
 app.use((request, response, next) => {
@@ -28,12 +30,13 @@ app.use(bodyParser.json())
 // setup routes, require routes into the application
 require('./routes')(app);
 // handle every other route with index.html
-app.get('*', (request, response) => {
-  let url = path.join(__dirname, '../client/build', 'index.html');
-  if (!url.startsWith(`${process.env.APP_URL}`)) {
-    // url = url.substring(1);
-    response.sendFile(url);
-  }
+app.get('/*', (request, response) => {
+  let url = path.resolve(__dirname, '../client/build', 'index.html');
+  response.sendFile(url, error => {
+    if (error) {
+      console.log(error);
+    }
+  });
 });
 
 // start server
