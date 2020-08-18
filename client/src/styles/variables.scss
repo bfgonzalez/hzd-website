@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Avenir&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Avenir&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap");
 // If needed, change your variables before importing Bulma
 
 //Initial font variable
@@ -10,8 +10,8 @@ $family-secondary: "Montserrat", sans-serif;
 $blue: #2ec4b6;
 $yellow: #f8961e;
 $black: #424242;
-$grey: #9A9595;
-$white: #FFFFFF;
+$grey: #9a9595;
+$white: #ffffff;
 
 $custom-colors: $blue, $black, $grey, $white, $yellow;
 
@@ -31,57 +31,47 @@ $navbar-burger-color: $white;
 $navbar-dropdown-background-color: $blue;
 
 .navbar .is-active {
-  background-color: $black;
+	background-color: $black;
 }
 
 .navbar a:hover {
-  border-bottom: $primary;
+	border-bottom: $primary;
 }
 
 .navbar .is-active a:hover {
-  background-color: $primary;
+	background-color: $primary;
 }
 
 // landing page
 .hero-section {
-  background: url('../assets/hzd-bg.png');
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: $white;
+	background: url("../assets/hzd-bg.png");
+	background-size: cover;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: $white;
 }
 
 // pages for machines, login, add machine
 .machines-section {
-  min-height: 100vh;
-  width: 90vw;
-  margin: 5rem auto;
-}
-
-.login-section {
-  height: 100vh;
-  width: 30vw;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  margin: 0 auto;
+	min-height: 100vh;
+	width: 90vw;
+	margin: 0 auto;
+	padding-top: 8rem;
 }
 
 .add-machine-section {
-  height: auto;
-  width: 60vw;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  padding: 8rem 0;
-  margin: 0 auto;
+	height: auto;
+	width: 60vw;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	padding: 8rem 0;
+	margin: 0 auto;
 }
-
 
 @import "../../node_modules/bulma/bulma.sass";
