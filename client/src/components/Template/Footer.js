@@ -8,7 +8,7 @@ const Footer = () => {
 					className="has-text-white mr-2"
 					href="https://bfgonzalez.netlify.app/"
 					target="_blank"
-					rel="noopener">
+					rel="noopener noreferrer">
 					Bianca Gonzalez
 				</a>
 				© {new Date().getFullYear()}

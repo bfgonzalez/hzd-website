@@ -3,21 +3,8 @@ import axios from "axios"
 import Loader from "react-loader-spinner"
 
 import Layout from "../Template/Layout"
-import Table from "../Template/Table"
+import MachineCard from "./MachineCard"
 import ButtonLink from "../Template/ButtonLink"
-
-const machineHeaders = [
-	"Name",
-	"Size",
-	"Origin",
-	"Override",
-	"Class",
-	"Machine Sites",
-	"Weakness",
-	"Strength",
-	"Weak Points",
-	"Explosive Components",
-]
 
 const Machines = ({ isAdmin }) => {
 	const [machines, setMachines] = useState([])
@@ -69,21 +56,11 @@ const Machines = ({ isAdmin }) => {
 			<div className="machines-section">
 				<h1 className="has-text-white title is-inline">Machine Catalogue</h1>
 				{isAdmin && (
-					<div className="field is-grouped is-pulled-right">
+					<div className="is-pulled-right">
 						<ButtonLink
 							text="Add Machine"
 							color="primary"
 							link="/admin/add-machine"
-						/>
-						<ButtonLink
-							text="Edit Machine"
-							color="warning"
-							link="/admin/edit-machine"
-						/>
-						<ButtonLink
-							text="Delete Machine"
-							color="danger"
-							link="/admin/delete-machine"
 						/>
 					</div>
 				)}
@@ -104,7 +81,13 @@ const Machines = ({ isAdmin }) => {
 						<Loader type="Oval" color="#29cdfb" height={100} width={100} />
 					</div>
 				) : (
-					<Table headers={machineHeaders} data={machines} />
+					<div className="columns is-multiline mt-2">
+						{machines.map((machine, index) => (
+							<div className="column is-one-third">
+								<MachineCard data={machine} index={index} isAdmin={isAdmin} />
+							</div>
+						))}
+					</div>
 				)}
 			</div>
 		</Layout>
