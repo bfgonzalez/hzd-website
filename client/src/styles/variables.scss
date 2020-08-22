@@ -19,7 +19,7 @@ $custom-colors: $blue, $black, $grey, $white, $yellow;
 $primary: $blue;
 $secondary: $yellow;
 $text: $black;
-$footer-background-color: $primary;
+$footer-background-color: transparent;
 $footer-padding: 1rem;
 $link: $primary;
 
@@ -28,6 +28,7 @@ $spacer: 0.6rem;
 
 // navbar
 $navbar-burger-color: $white;
+$navbar-background-color: transparent;
 $navbar-dropdown-background-color: $blue;
 
 .navbar .is-active {
@@ -44,7 +45,7 @@ $navbar-dropdown-background-color: $blue;
 
 // landing page
 .hero-section {
-	background: url("../assets/hzd-bg.png");
+	background: url("../assets/aloy.png");
 	background-size: cover;
 	height: 100vh;
 	display: flex;

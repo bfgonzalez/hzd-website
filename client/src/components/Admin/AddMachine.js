@@ -215,7 +215,7 @@ const AddMachine = () => {
 					<div className="field is-grouped mt-5">
 						<ButtonLink text="Cancel" link="/admin/machines" />
 						<button
-							className="button is-primary has-text-weight-bold"
+							className="button is-success has-text-weight-bold"
 							type="submit"
 							onClick={handleSubmit}>
 							Add Machine
