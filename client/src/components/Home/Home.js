@@ -12,11 +12,14 @@ const Home = () => {
 	return (
 		<Layout isHome>
 			<div className="hero-section">
-				{/* <img src={hzdLogo} alt="logo" /> */}
-				{/* <div className="field is-grouped mt-5">
-          <ButtonLink text="View Machine Catalogue" color="primary" link="/machines"/>
-          <ButtonLink text="Admin Login" color="black" link="/admin/login"/>
-        </div> */}
+				<img src={hzdLogo} alt="logo" />
+				<div className="field is-grouped mt-5">
+					<ButtonLink
+						text="View Machine Catalogue"
+						color="black"
+						link="/machines"
+					/>
+				</div>
 			</div>
 		</Layout>
 	)
