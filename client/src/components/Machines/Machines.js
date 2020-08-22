@@ -59,7 +59,7 @@ const Machines = ({ isAdmin }) => {
 					<div className="is-pulled-right">
 						<ButtonLink
 							text="Add Machine"
-							color="primary"
+							color="success"
 							link="/admin/add-machine"
 						/>
 					</div>
@@ -77,7 +77,7 @@ const Machines = ({ isAdmin }) => {
 					</div>
 				</div>
 				{isLoading ? (
-					<div className="loading-indicator columns is-centered is-vcentered">
+					<div className="loading-indicator columns is-centered is-mobile is-vcentered">
 						<Loader type="Oval" color="#29cdfb" height={100} width={100} />
 					</div>
 				) : (

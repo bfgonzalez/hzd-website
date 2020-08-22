@@ -50,7 +50,7 @@ const Login = () => {
 							</div>
 						</div>
 						<button
-							className="button is-primary has-text-weight-bold"
+							className="button is-black has-text-weight-bold"
 							type="submit">
 							Login
 						</button>
