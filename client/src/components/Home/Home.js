@@ -13,7 +13,7 @@ const Home = () => {
 		<Layout isHome>
 			<div className="hero-section">
 				<img src={hzdLogo} alt="logo" />
-				<div className="field is-grouped mt-5">
+				<div className="field is-grouped mt-1 is-hidden-desktop">
 					<ButtonLink
 						text="View Machine Catalogue"
 						color="black"
