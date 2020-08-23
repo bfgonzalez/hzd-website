@@ -1,26 +1,36 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React from "react"
+import { BrowserRouter, Switch, Route } from "react-router-dom"
 
 // import Layout from './components/Template/Layout';
-import Home from './components/Home/Home';
-import Machines from './components/Machines/Machines';
-import Login from './components/Admin/Login';
-import AdminPanel from './components/Admin/AdminPanel';
-import AddMachine from './components/Admin/AddMachine';
+import Home from "./components/Home/Home"
+import Machines from "./components/Machines/Machines"
+import Login from "./components/Admin/Login"
+import AdminPanel from "./components/Admin/AdminPanel"
+import AddMachine from "./components/Admin/AddMachine"
+import MachineDetails from "./components/Machines/MachineDetails"
 
 const App = () => {
   return (
     <BrowserRouter basename="/">
       <Switch>
-        <Route exact path='/' component={Home}/>
-        <Route path='/machines' component={Machines}/>
+        <Route exact path="/" component={Home} />
+        <Route
+          path="/machines"
+          render={({ match: { url } }) => (
+            <>
+              <Route path={`${url}`} component={Machines} exact />
+              <Route path={`${url}/:name`} component={MachineDetails} />
+            </>
+          )}
+        />
+        <Route path="/hello" component={MachineDetails} />
         <Route
           path="/admin"
-          render={({ match: {url} }) => (
+          render={({ match: { url } }) => (
             <>
               <Route path={`${url}/login`} component={Login} exact />
-              <Route path={`${url}/machines`} component={AdminPanel}/>
-              <Route path={`${url}/add-machine`} component={AddMachine}/>
+              <Route path={`${url}/machines`} component={AdminPanel} />
+              <Route path={`${url}/add-machine`} component={AddMachine} />
             </>
           )}
         />
@@ -29,4 +39,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
