@@ -27,8 +27,9 @@ const MachineDetails = ({ match }) => {
     params: { name },
   } = match
 
-  // replaces all "-" with space
+  // replaces all "-" with space (except for Shell-Walker)
   let machineName = name.replace(/-/g, " ")
+  if (name === "Shell-Walker") machineName = name
 
   // retain name format (machine-name) but make lower case
   let machineImage = name.toLowerCase()
