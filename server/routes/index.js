@@ -5,6 +5,8 @@ const api = require("../controllers/views")
 module.exports = (app) => {
   app.get("/api/machines", machinesController.list)
   app.get("/api/views/machines", api.list)
+  app.get("/api/machines/:id", machinesController.retrieve)
   app.get("/api/machines/filter", machinesController.filterList)
   app.post("/api/machines", machinesController.create)
+  app.delete("/api/machines/:id", machinesController.delete)
 }
