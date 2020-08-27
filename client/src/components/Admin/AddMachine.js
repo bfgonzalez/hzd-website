@@ -43,9 +43,8 @@ const AddMachine = () => {
         },
       })
       .then((response) => {
-        console.log(response.data)
         toast({
-          message: `${response.data.name} has been added to the machines database!`,
+          message: `<strong>${response.data.name} has been added to the machines database!</strong>`,
           duration: 3000,
           type: "is-success",
           dismissible: true,

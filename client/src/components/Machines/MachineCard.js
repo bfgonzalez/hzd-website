@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import axios from "axios"
 import { toast } from "bulma-toast"
 
@@ -9,20 +9,24 @@ const MachineCard = ({ data, index, isAdmin }) => {
   const machineName = data.name.replace(/\s+/g, "-")
   const machineImage = machineName.toLowerCase()
 
+  // only call this function after confirmation
   const deleteMachine = () => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/${data.id}`)
-      .then((response) => {
-        toast({
-          message: `${data.name} has been removed from the machines database!`,
-          duration: 3000,
-          type: "is-success",
-          dismissible: true,
+    window.confirm(
+      `Are you sure you want to delete ${machineName} from the database?`
+    ) &&
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/${data.id}`)
+        .then((response) => {
+          toast({
+            message: `<strong>${data.name} has been removed from the machines database!</strong>`,
+            duration: 3000,
+            type: "is-success",
+            dismissible: true,
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         })
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
-      })
   }
 
   return (
@@ -68,7 +72,9 @@ const MachineCard = ({ data, index, isAdmin }) => {
                   color="warning"
                   link="/admin/edit-machine"
                 />
-                <button className="button is-danger" onClick={deleteMachine}>
+                <button
+                  className="button is-danger has-text-weight-bold"
+                  onClick={deleteMachine}>
                   Delete
                 </button>
               </>

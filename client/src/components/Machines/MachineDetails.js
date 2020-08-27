@@ -17,6 +17,7 @@ const DetailsPanel = ({ labels, values }) => {
           </p>
         )
       })}
+      <ButtonLink text="Go Back to Machine Catalogue" link="/machines" />
     </div>
   )
 }
@@ -51,7 +52,6 @@ const MachineDetails = ({ match }) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/filter?name=${machineName}`)
       .then((response) => {
-        console.log(response.data)
         setMachineDetails(response.data)
       })
   }, [machineName])
@@ -59,13 +59,6 @@ const MachineDetails = ({ match }) => {
   return (
     <Layout>
       <div className="machine-details-section">
-        <div className="level">
-          <div className="level-left">
-            <div className="level-item">
-              <ButtonLink text="Machine Catalogue" link="/machines" />
-            </div>
-          </div>
-        </div>
         <div className="columns is-centered is-vcentered">
           <div className="column is-8 is-12-mobile has-text-centered">
             <h1 className="title has-text-white">{machineName}</h1>
@@ -75,11 +68,15 @@ const MachineDetails = ({ match }) => {
             />
           </div>
           <div className="column is-4 has-text-left p-4">
-            {machineDetails.map((machine) => {
+            {machineDetails.map((machine, index) => {
               let machineValues = Object.values(machine)
 
               return (
-                <DetailsPanel labels={machineHeaders} values={machineValues} />
+                <DetailsPanel
+                  labels={machineHeaders}
+                  values={machineValues}
+                  key={index}
+                />
               )
             })}
           </div>
