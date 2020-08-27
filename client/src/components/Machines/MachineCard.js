@@ -26,8 +26,8 @@ const MachineCard = ({ data, index, isAdmin }) => {
   }
 
   return (
-    <div className="machine-card">
-      <div className="card" key={index}>
+    <div className="machine-card" key={index}>
+      <div className="card">
         <div className="card-image">
           <figure className="image is-4by3">
             <img

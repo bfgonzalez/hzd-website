@@ -54,7 +54,7 @@ const MachineDetails = ({ match }) => {
         console.log(response.data)
         setMachineDetails(response.data)
       })
-  }, [])
+  }, [machineName])
 
   return (
     <Layout>
