@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { useHistory } from "react-router-dom"
 import axios from "axios"
 import Loader from "react-loader-spinner"
 
@@ -13,11 +12,9 @@ const Machines = ({ isAdmin }) => {
   const [isLoading, setLoading] = useState(true)
   const filteredMachines = []
 
-  const history = useHistory()
-
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}`)
+      .get(process.env.REACT_APP_API_URL)
       .then((response) => {
         // remove loading indicator after data has been fetched
         setLoading(false)
@@ -86,12 +83,7 @@ const Machines = ({ isAdmin }) => {
         ) : (
           <div className="columns is-multiline mt-2">
             {machines.map((machine, index) => (
-              <div
-                className="column is-one-third"
-                onClick={() => {
-                  const machineName = machine.name.replace(/\s+/g, "-")
-                  history.push(`/machines/${machineName}`)
-                }}>
+              <div className="column is-one-third">
                 <MachineCard data={machine} index={index} isAdmin={isAdmin} />
               </div>
             ))}

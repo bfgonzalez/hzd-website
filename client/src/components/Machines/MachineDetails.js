@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 
 import Layout from "../Template/Layout"
+import ButtonLink from "../Template/ButtonLink"
 
 const DetailsPanel = ({ labels, values }) => {
   return (
@@ -57,22 +58,31 @@ const MachineDetails = ({ match }) => {
 
   return (
     <Layout>
-      <div className="machine-details-section columns is-centered is-vcentered">
-        <div className="column is-8 is-12-mobile has-text-centered">
-          <h1 className="title has-text-white">{machineName}</h1>
-          <img
-            src={require(`../../assets/machines/${machineImage}.png`)}
-            alt={`${name}`}
-          />
+      <div className="machine-details-section">
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item">
+              <ButtonLink text="Machine Catalogue" link="/machines" />
+            </div>
+          </div>
         </div>
-        <div className="column is-4 has-text-left p-4">
-          {machineDetails.map((machine) => {
-            let machineValues = Object.values(machine)
+        <div className="columns is-centered is-vcentered">
+          <div className="column is-8 is-12-mobile has-text-centered">
+            <h1 className="title has-text-white">{machineName}</h1>
+            <img
+              src={require(`../../assets/machines/${machineImage}.png`)}
+              alt={`${name}`}
+            />
+          </div>
+          <div className="column is-4 has-text-left p-4">
+            {machineDetails.map((machine) => {
+              let machineValues = Object.values(machine)
 
-            return (
-              <DetailsPanel labels={machineHeaders} values={machineValues} />
-            )
-          })}
+              return (
+                <DetailsPanel labels={machineHeaders} values={machineValues} />
+              )
+            })}
+          </div>
         </div>
       </div>
     </Layout>
