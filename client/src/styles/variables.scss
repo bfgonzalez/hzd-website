@@ -54,10 +54,6 @@ $navbar-dropdown-background-color: $blue;
   padding: 8rem 0;
 }
 
-.machine-details-section .column {
-  margin-left: 2rem;
-}
-
 // machine card component
 .card {
   border-radius: 5px;
@@ -77,6 +73,24 @@ $navbar-dropdown-background-color: $blue;
 
 .loading-indicator {
   height: 55vh;
+}
+
+form {
+  flex: 1;
+}
+
+.control label {
+  font-size: 1.5rem;
+}
+
+// vertically centers content of section on desktop and mobile
+.full-height {
+  min-height: 100vh;
+  display: flex;
+}
+
+a:active {
+  font-weight: bold;
 }
 
 @import "../../node_modules/bulma/bulma.sass";

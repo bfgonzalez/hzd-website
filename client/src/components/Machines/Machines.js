@@ -83,7 +83,7 @@ const Machines = ({ isAdmin }) => {
         ) : (
           <div className="columns is-multiline mt-2">
             {machines.map((machine, index) => (
-              <div className="column is-one-third">
+              <div className="column is-one-third" key={index}>
                 <MachineCard data={machine} index={index} isAdmin={isAdmin} />
               </div>
             ))}
