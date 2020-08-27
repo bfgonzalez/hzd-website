@@ -38,11 +38,12 @@ module.exports = {
       .catch((error) => console.log(error))
   },
 
-  // list all machines in database (excluding id, create_at & updated_at)
+  // list all machines in database (excluding, create_at & updated_at)
   list(request, response) {
     return models.machines
       .findAll({
         attributes: [
+          "id",
           "name",
           "size",
           "origin",
@@ -67,13 +68,8 @@ module.exports = {
           id: request.params.id,
         },
       })
-      .then((machine) => {
-        if (!machine) {
-          return response.status(400).send("Machine not found")
-        }
-        return response.status(200).send(machine)
-      })
-      .catch((error) => response.status(400).send(error))
+      .then((machine) => response.status(200).send(machine))
+      .catch((error) => response.status(400).send(error.message))
   },
 
   // filter list based on query params
@@ -86,7 +82,7 @@ module.exports = {
       .catch((error) => response.status(400).send(error.message))
   },
 
-  // delete machine from database
+  // delete machine based on given id
   delete(request, response) {
     return models.machines
       .findOne({
