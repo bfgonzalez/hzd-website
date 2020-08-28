@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import axios from "axios"
 
 import Layout from "../Template/Layout"
-import ButtonLink from "../Template/ButtonLink"
 
 const DetailsPanel = ({ labels, values }) => {
+  const history = useHistory()
+
   return (
     <div className="content has-text-white is-medium">
       {labels.map((label, index) => {
@@ -17,7 +19,11 @@ const DetailsPanel = ({ labels, values }) => {
           </p>
         )
       })}
-      <ButtonLink text="Go Back to Machine Catalogue" link="/machines" />
+      <button
+        className="button has-text-weight-bold"
+        onClick={() => history.go(-1)}>
+        Go Back to Machine Catalogue
+      </button>
     </div>
   )
 }
