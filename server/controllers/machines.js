@@ -42,6 +42,7 @@ module.exports = {
   list(request, response) {
     return models.machines
       .findAll({
+        order: [["id", "ASC"]],
         attributes: [
           "id",
           "name",
@@ -77,6 +78,7 @@ module.exports = {
     return models.machines
       .findAll({
         where: request.query,
+        order: [["id", "ASC"]],
       })
       .then((machines) => response.status(200).send(machines))
       .catch((error) => response.status(400).send(error.message))
