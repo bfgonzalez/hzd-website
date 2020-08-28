@@ -82,6 +82,55 @@ module.exports = {
       .catch((error) => response.status(400).send(error.message))
   },
 
+  // update machine by id
+  update(request, response) {
+    const {
+      name,
+      size,
+      origin,
+      override,
+      machine_class,
+      machine_sites,
+      weakness,
+      strength,
+      weak_points,
+      explosive_components,
+      id,
+      created_at,
+      updated_at,
+    } = request.body
+    return models.machines
+      .findOne({
+        where: {
+          id: request.params.id,
+        },
+      })
+      .then((machine) => {
+        if (!machine) {
+          return response.status(400).send("Machine not found")
+        }
+        return machine
+          .update({
+            name: name,
+            size: size,
+            origin: origin,
+            override: override,
+            machine_class: machine_class,
+            machine_sites: machine_sites,
+            weakness: weakness,
+            strength: strength,
+            weak_points: weak_points,
+            explosive_components: explosive_components,
+            id: id,
+            created_at: created_at,
+            updated_at: updated_at,
+          })
+          .then(() => response.status(200).send(machine))
+          .catch((error) => response.status(400).send(error.message))
+      })
+      .catch((error) => response.status(400).send(error.message))
+  },
+
   // delete machine based on given id
   delete(request, response) {
     return models.machines
