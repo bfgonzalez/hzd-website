@@ -36,12 +36,13 @@ const EditMachine = ({ match }) => {
       let machine = response.data
 
       setValues({
+        id: machine.id,
         name: machine.name || "",
         size: machine.size || "",
         origin: machine.origin || "",
         override: machine.override || "",
         machine_class: machine.machine_class || "",
-        machine_sites: machine.machine_sites || "",
+        machine_sites: machine.machine_sites || 0,
         weakness: machine.weakness || "",
         strength: machine.strength || "",
         weak_points: machine.weak_points || "",
@@ -50,7 +51,7 @@ const EditMachine = ({ match }) => {
         updated_at: moment(currentDate).format("MM-DD-YYYY"),
       })
     })
-  }, [id, currentDate])
+  }, [id])
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
