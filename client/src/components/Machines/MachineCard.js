@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import axios from "axios"
 import { toast } from "bulma-toast"
 
@@ -14,19 +14,17 @@ const MachineCard = ({ data, index, isAdmin }) => {
     window.confirm(
       `Are you sure you want to delete ${machineName} from the database?`
     ) &&
-      axios
-        .delete(`${process.env.REACT_APP_API_URL}/${data.id}`)
-        .then((response) => {
-          toast({
-            message: `<strong>${data.name} has been removed from the machines database!</strong>`,
-            duration: 3000,
-            type: "is-success",
-            dismissible: true,
-          })
-          setTimeout(() => {
-            window.location.reload()
-          }, 1000)
+      axios.delete(`${process.env.REACT_APP_API_URL}/${data.id}`).then(() => {
+        toast({
+          message: `<strong>${data.name} has been removed from the machines database!</strong>`,
+          duration: 3000,
+          type: "is-success",
+          dismissible: true,
         })
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      })
   }
 
   return (
@@ -70,7 +68,7 @@ const MachineCard = ({ data, index, isAdmin }) => {
                 <ButtonLink
                   text="Edit"
                   color="warning"
-                  link="/admin/edit-machine"
+                  link={`/admin/edit-machine/${data.id}`}
                 />
                 <button
                   className="button is-danger has-text-weight-bold"
