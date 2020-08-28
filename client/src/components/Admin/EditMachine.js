@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import moment from "moment"
 import { useHistory } from "react-router-dom"
@@ -7,9 +7,13 @@ import { toast } from "bulma-toast"
 import Layout from "../Template/Layout"
 import ButtonLink from "../Template/ButtonLink"
 
-const AddMachine = () => {
+const EditMachine = ({ match }) => {
   const currentDate = new Date()
   const history = useHistory()
+
+  const {
+    params: { id },
+  } = match
 
   const [values, setValues] = useState({
     name: "",
@@ -26,6 +30,28 @@ const AddMachine = () => {
     updated_at: moment(currentDate).format("MM-DD-YYYY"),
   })
 
+  // get machine info based on id
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/id/${id}`).then((response) => {
+      let machine = response.data
+
+      setValues({
+        name: machine.name || "",
+        size: machine.size || "",
+        origin: machine.origin || "",
+        override: machine.override || "",
+        machine_class: machine.machine_class || "",
+        machine_sites: machine.machine_sites || "",
+        weakness: machine.weakness || "",
+        strength: machine.strength || "",
+        weak_points: machine.weak_points || "",
+        explosive_components: machine.explosive_components || "",
+        created_at: machine.created_at || "",
+        updated_at: moment(currentDate).format("MM-DD-YYYY"),
+      })
+    })
+  }, [id, currentDate])
+
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setValues({ ...values, [name]: value })
@@ -37,14 +63,14 @@ const AddMachine = () => {
     let data = values
 
     axios
-      .post(process.env.REACT_APP_API_URL, data, {
+      .put(`${process.env.REACT_APP_API_URL}/${data.id}`, data, {
         headers: {
           "content-type": "application/json",
         },
       })
       .then(() => {
         toast({
-          message: `<strong>${data.name} has been added to the machines database!</strong>`,
+          message: `<strong>${data.name} has been updated!</strong>`,
           duration: 3000,
           type: "is-success",
           dismissible: true,
@@ -58,9 +84,9 @@ const AddMachine = () => {
 
   return (
     <Layout>
-      <div className="add-machine-section">
-        <h1 className="title has-text-white">Add Machine</h1>
-        <form onSubmit={handleSubmit} name="addMachineForm">
+      <div className="edit-machine-section">
+        <h1 className="title has-text-white">Edit Machine</h1>
+        <form onSubmit={handleSubmit} name="editMachineForm">
           <div className="field">
             <div className="control">
               <label htmlFor="name" className="has-text-white">
@@ -217,7 +243,7 @@ const AddMachine = () => {
               className="button is-success has-text-weight-bold"
               type="submit"
               onClick={handleSubmit}>
-              Add Machine
+              Edit Machine
             </button>
           </div>
         </form>
@@ -226,4 +252,4 @@ const AddMachine = () => {
   )
 }
 
-export default AddMachine
+export default EditMachine
