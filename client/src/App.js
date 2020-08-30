@@ -1,7 +1,6 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
-// import Layout from './components/Template/Layout';
 import Home from "./components/Home/Home"
 import Machines from "./components/Machines/Machines"
 import Login from "./components/Admin/Login"
@@ -10,7 +9,18 @@ import AddMachine from "./components/Admin/AddMachine"
 import EditMachine from "./components/Admin/EditMachine"
 import MachineDetails from "./components/Machines/MachineDetails"
 
+import ProtectedRoute from "./components/Template/ProtectedRoute"
+
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  const handleLogin = () => {
+    setIsAuthenticated(true)
+    sessionStorage.setItem("isAuthenticated", isAuthenticated)
+  }
+
+  const persistAuthentication = sessionStorage.getItem("isAuthenticated")
+
   return (
     <BrowserRouter basename="/">
       <Switch>
@@ -24,15 +34,30 @@ const App = () => {
             </>
           )}
         />
-        <Route path="/hello" component={MachineDetails} />
         <Route
           path="/admin"
           render={({ match: { url } }) => (
             <>
-              <Route path={`${url}/login`} component={Login} exact />
-              <Route path={`${url}/machines`} component={AdminPanel} />
-              <Route path={`${url}/add-machine`} component={AddMachine} />
-              <Route path={`${url}/edit-machine/:id`} component={EditMachine} />
+              <Route
+                exact
+                path={`${url}/login`}
+                render={() => <Login handleLogin={handleLogin} />}
+              />
+              <ProtectedRoute
+                isAuthenticated={persistAuthentication}
+                path={`${url}/machines`}
+                component={AdminPanel}
+              />
+              <ProtectedRoute
+                isAuthenticated={persistAuthentication}
+                path={`${url}/add-machine`}
+                component={AddMachine}
+              />
+              <ProtectedRoute
+                isAuthenticated={persistAuthentication}
+                path={`${url}/edit-machine/:id`}
+                component={EditMachine}
+              />
             </>
           )}
         />
