@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import moment from "moment"
-import { useHistory } from "react-router-dom"
+import { useHistory, withRouter } from "react-router-dom"
 import { toast } from "bulma-toast"
 
 import Layout from "../Template/Layout"
@@ -51,6 +51,7 @@ const EditMachine = ({ match }) => {
         updated_at: moment(currentDate).format("MM-DD-YYYY"),
       })
     })
+    // eslint-disable-next-line
   }, [id])
 
   const handleInputChange = (event) => {
@@ -253,4 +254,4 @@ const EditMachine = ({ match }) => {
   )
 }
 
-export default EditMachine
+export default withRouter(EditMachine)
