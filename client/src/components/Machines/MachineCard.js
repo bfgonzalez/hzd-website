@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { toast } from "bulma-toast"
 
-import ButtonLink from "../Template/ButtonLink"
+import Button from "../Template/Button"
 
 const MachineCard = ({ data, index, isAdmin }) => {
   // regex: replace all spaces with dashes ("-")
@@ -58,14 +58,14 @@ const MachineCard = ({ data, index, isAdmin }) => {
           </div>
 
           <div className="field is-grouped">
-            <ButtonLink
+            <Button
               text="Details"
               color="primary"
               link={`/machines/${machineName}`}
             />
             {isAdmin && (
               <>
-                <ButtonLink
+                <Button
                   text="Edit"
                   color="warning"
                   link={`/admin/edit-machine/${data.id}`}

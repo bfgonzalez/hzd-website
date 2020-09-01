@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner"
 
 import Layout from "../Template/Layout"
 import MachineCard from "./MachineCard"
-import ButtonLink from "../Template/ButtonLink"
+import Button from "../Template/Button"
 
 const Machines = ({ isAdmin }) => {
   const [machines, setMachines] = useState([])
@@ -57,7 +57,7 @@ const Machines = ({ isAdmin }) => {
         <h1 className="has-text-white title is-inline">Machine Catalogue</h1>
         {isAdmin && (
           <div className="is-pulled-right">
-            <ButtonLink
+            <Button
               text="Add Machine"
               color="success"
               link="/admin/add-machine"
