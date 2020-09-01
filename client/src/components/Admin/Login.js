@@ -1,24 +1,59 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
+import Joi from "joi-browser"
 
 import Layout from "../Template/Layout"
+import FormInput from "../Template/FormInput"
+import Button from "../Template/Button"
+
+import { loginValidationSchema } from "../../validationSchema"
 
 const Login = ({ handleLogin }) => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+  })
 
   const history = useHistory()
 
+  const [errorMessage, setErrorMessage] = useState("")
+  const [authorizationMessage, setAuthorizationMessage] = useState("")
+
+  const validateValues = () => {
+    Joi.validate(values, loginValidationSchema, (error) => {
+      if (error) {
+        console.log(error)
+        setErrorMessage(error.message)
+      } else {
+        setErrorMessage("")
+      }
+    })
+  }
+
+  const handleInputBlur = () => {
+    validateValues()
+  }
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setValues({ ...values, [name]: value })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
+
     if (
-      username === `${process.env.REACT_APP_USERNAME}` &&
-      password === `${process.env.REACT_APP_PASSWORD}`
+      values.username === `${process.env.REACT_APP_USERNAME}` &&
+      values.password === `${process.env.REACT_APP_PASSWORD}`
     ) {
       handleLogin()
       history.push(`${process.env.REACT_APP_ADMIN_URL}`)
     } else {
-      alert("unauthorized user")
+      setValues({
+        username: "",
+        password: "",
+      })
+      setAuthorizationMessage("Unauthorized User")
     }
   }
 
@@ -28,33 +63,31 @@ const Login = ({ handleLogin }) => {
         <div className="login-section column is-4 is-10-mobile">
           <h1 className="title has-text-white">Login</h1>
           <form onSubmit={handleSubmit}>
-            <div className="field">
-              <div className="control">
-                <input
-                  className="input is-primary"
-                  name="username"
-                  type="text"
-                  placeholder="Username"
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <div className="control">
-                <input
-                  className="input is-primary"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </div>
-            </div>
-            <button
-              className="button is-black has-text-weight-bold"
-              type="submit">
-              Login
-            </button>
+            <FormInput
+              name="username"
+              type="text"
+              onBlur={handleInputBlur}
+              onChange={handleInputChange}
+              value={values.username}
+              required
+            />
+            <FormInput
+              name="password"
+              type="password"
+              onBlur={handleInputBlur}
+              onChange={handleInputChange}
+              value={values.password}
+              required
+            />
+            <p className="has-text-white has-text-weight-bold mb-2">
+              {authorizationMessage}
+            </p>
+            <Button
+              text="Login"
+              type="submit"
+              color="black"
+              onClick={handleSubmit}
+            />
           </form>
         </div>
       </div>

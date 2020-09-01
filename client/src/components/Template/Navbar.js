@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import classnames from "classnames"
 
-import ButtonLink from "./ButtonLink"
+import Button from "./Button"
 
 const Navbar = ({ isHome }) => {
   const [isActive, setActive] = useState(false)
@@ -61,11 +61,7 @@ const Navbar = ({ isHome }) => {
             Admin
           </Link>
           {isLoggedIn && (
-            <button
-              className="button is-black has-text-weight-bold"
-              onClick={handleLogout}>
-              Logout
-            </button>
+            <Button text="Logout" color="black" onClick={handleLogout} />
           )}
         </div>
       </div>
