@@ -9,9 +9,6 @@ const SEO = () => {
 
   return (
     <Helmet
-      htmlAttributes={{
-        lang,
-      }}
       title="Horizon Zero Dawn Wiki"
       meta={[
         {
@@ -60,7 +57,6 @@ const SEO = () => {
 }
 
 SEO.defaultProps = {
-  lang: `en`,
   meta: [],
   description: ``,
 }
