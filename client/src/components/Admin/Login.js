@@ -46,9 +46,10 @@ const Login = ({ handleLogin }) => {
       values.username === `${process.env.REACT_APP_USERNAME}` &&
       values.password === `${process.env.REACT_APP_PASSWORD}`
     ) {
-      handleLogin()
-      history.push(`${process.env.REACT_APP_ADMIN_URL}`)
+      sessionStorage.setItem("isAuthenticated", true)
+      history.push("/admin/panel")
     } else {
+      sessionStorage.setItem("isAuthenticated", false)
       setValues({
         username: "",
         password: "",

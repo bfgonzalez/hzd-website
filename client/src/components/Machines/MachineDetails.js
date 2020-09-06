@@ -22,7 +22,7 @@ const DetailsPanel = ({ labels, values }) => {
       <button
         className="button has-text-weight-bold"
         onClick={() => history.go(-1)}>
-        Go Back to Machine Catalogue
+        Back
       </button>
     </div>
   )

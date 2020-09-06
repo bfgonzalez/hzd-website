@@ -1,13 +1,15 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 
-const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+const ProtectedRoute = ({ component: Component, isAdmin, ...rest }) => {
+  const isAuthenticated = sessionStorage.getItem("isAuthenticated")
+
   return (
     <Route
       {...rest}
       render={(props) => {
         if (isAuthenticated) {
-          return <Component />
+          return <Component isAdmin />
         } else {
           return (
             <Redirect to={{ pathname: "/", state: { from: props.location } }} />
