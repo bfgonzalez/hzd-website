@@ -14,17 +14,19 @@ const MachineCard = ({ data, index, isAdmin }) => {
     window.confirm(
       `Are you sure you want to delete ${machineName} from the database?`
     ) &&
-      axios.delete(`${process.env.REACT_APP_API_URL}/machines/${data.id}`).then(() => {
-        toast({
-          message: `<strong>${data.name} has been removed from the machines database!</strong>`,
-          duration: 3000,
-          type: "is-success",
-          dismissible: true,
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/machines/${data.id}`)
+        .then(() => {
+          toast({
+            message: `<strong>${data.name} has been removed from the machines database!</strong>`,
+            duration: 3000,
+            type: "is-success",
+            dismissible: true,
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         })
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
-      })
   }
 
   return (

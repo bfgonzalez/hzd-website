@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
 import Home from "./components/Home/Home"
@@ -13,15 +13,6 @@ import MachineDetails from "./components/Machines/MachineDetails"
 import ProtectedRoute from "./components/Template/ProtectedRoute"
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  const handleLogin = () => {
-    setIsAuthenticated(true)
-    sessionStorage.setItem("isAuthenticated", isAuthenticated)
-  }
-
-  const persistAuthentication = sessionStorage.getItem("isAuthenticated")
-
   return (
     <BrowserRouter basename="/">
       <Switch>
@@ -40,7 +31,7 @@ const App = () => {
           render={({ match: { url } }) => (
             <>
               <Route path={`${url}`} component={Cauldrons} exact />
-              {/* <Route path={`${url}/:name`} component={MachineDetails} /> */}
+              {/* <Route path={`${url}/:name`} component={CauldronDetails} /> */}
             </>
           )}
         />
@@ -48,26 +39,22 @@ const App = () => {
           path="/admin"
           render={({ match: { url } }) => (
             <>
-              <Route
-                exact
-                path={`${url}/login`}
-                render={() => <Login handleLogin={handleLogin} />}
-              />
+              <Route exact path={`${url}/login`} render={() => <Login />} />
+              <ProtectedRoute path={`${url}/panel`} component={AdminPanel} />
               <ProtectedRoute
-                isAuthenticated={persistAuthentication}
                 path={`${url}/machines`}
-                component={AdminPanel}
+                component={Machines}
+                isAdmin
               />
               <ProtectedRoute
-                isAuthenticated={persistAuthentication}
                 path={`${url}/add-machine`}
                 component={AddMachine}
               />
               <ProtectedRoute
-                isAuthenticated={persistAuthentication}
                 path={`${url}/edit-machine/:id`}
                 component={EditMachine}
               />
+              <ProtectedRoute path={`${url}/cauldrons`} component={Cauldrons} />
             </>
           )}
         />

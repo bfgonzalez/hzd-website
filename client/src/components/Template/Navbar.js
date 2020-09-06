@@ -7,24 +7,21 @@ import Button from "./Button"
 const Navbar = ({ isHome }) => {
   const [isActive, setActive] = useState(false)
   const [activeTab, setActiveTab] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [navbarLinks, setNavbarLinks] = useState(["/machines", "/cauldrons"])
 
   const history = useHistory()
 
-  // handle isLoggedIn state
+  const isAuthenticated = sessionStorage.getItem("isAuthenticated")
+
   useEffect(() => {
-    let url = window.location.href
-    // if url contains "login", keep isLoggedIn === false
-    if (/login/.test(url)) {
-      setIsLoggedIn(false)
-
-      // if url contains any urls with "admin" (except "login"), set isLoggedIn === true
-    } else if (/admin/.test(url)) {
-      setIsLoggedIn(true)
+    if (isAuthenticated) {
+      setNavbarLinks(["/admin/machines", "/admin/cauldrons"])
+    } else {
+      setNavbarLinks(["/machines", "/cauldrons"])
     }
-  }, [isLoggedIn])
+  }, [isAuthenticated])
 
-  // handle activeTab statw
+  // handle activeTab state
   useEffect(() => {
     let url = window.location.href
     let slug = url.split("/").pop()
@@ -49,8 +46,7 @@ const Navbar = ({ isHome }) => {
     history.push("/")
   }
 
-  const navbarText = ["Machines", "Cauldrons", "Admin"]
-  const navbarLinks = ["/machines", "/cauldrons", "/admin/login"]
+  const navbarText = ["Machines", "Cauldrons"]
 
   return (
     <nav
@@ -86,8 +82,10 @@ const Navbar = ({ isHome }) => {
               {text}
             </Link>
           ))}
-          {isLoggedIn && (
+          {isAuthenticated ? (
             <Button text="Logout" color="black" onClick={handleLogout} />
+          ) : (
+            <Button text="Login" color="black" link="/admin/login" />
           )}
         </div>
       </div>
