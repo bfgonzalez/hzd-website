@@ -14,7 +14,7 @@ const Machines = ({ isAdmin }) => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL)
+      .get(`${process.env.REACT_APP_API_URL}/machines`)
       .then((response) => {
         // remove loading indicator after data has been fetched
         setLoading(false)
@@ -54,14 +54,10 @@ const Machines = ({ isAdmin }) => {
   return (
     <Layout>
       <div className="machines-section">
-        <h1 className="has-text-white title is-inline">Machine Catalogue</h1>
+        <h1 className="has-text-white title is-inline">Machines</h1>
         {isAdmin && (
           <div className="is-pulled-right">
-            <Button
-              text="Add Machine"
-              color="success"
-              link="/admin/add-machine"
-            />
+            <Button text="Add Machine" color="info" link="/admin/add-machine" />
           </div>
         )}
         <div className="field mt-4">
@@ -83,7 +79,9 @@ const Machines = ({ isAdmin }) => {
         ) : (
           <div className="columns is-multiline mt-2">
             {machines.map((machine, index) => (
-              <div className="column is-one-third-desktop is-half-tablet" key={index}>
+              <div
+                className="column is-one-third-desktop is-half-tablet"
+                key={index}>
                 <MachineCard data={machine} index={index} isAdmin={isAdmin} />
               </div>
             ))}

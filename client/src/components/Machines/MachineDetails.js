@@ -56,7 +56,9 @@ const MachineDetails = ({ match }) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/filter?name=${machineName}`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/machines/filter?name=${machineName}`
+      )
       .then((response) => {
         setMachineDetails(response.data)
       })

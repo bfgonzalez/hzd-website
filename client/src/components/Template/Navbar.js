@@ -6,10 +6,12 @@ import Button from "./Button"
 
 const Navbar = ({ isHome }) => {
   const [isActive, setActive] = useState(false)
+  const [activeTab, setActiveTab] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const history = useHistory()
 
+  // handle isLoggedIn state
   useEffect(() => {
     let url = window.location.href
     // if url contains "login", keep isLoggedIn === false
@@ -22,10 +24,33 @@ const Navbar = ({ isHome }) => {
     }
   }, [isLoggedIn])
 
+  // handle activeTab statw
+  useEffect(() => {
+    let url = window.location.href
+    let slug = url.split("/").pop()
+
+    switch (slug) {
+      case "machines":
+        setActiveTab("Machines")
+        break
+      case "cauldrons":
+        setActiveTab("Cauldrons")
+        break
+      case "login":
+        setActiveTab("Admin")
+        break
+      default:
+        setActiveTab("")
+    }
+  }, [activeTab])
+
   const handleLogout = () => {
     sessionStorage.removeItem("isAuthenticated")
     history.push("/")
   }
+
+  const navbarText = ["Machines", "Cauldrons", "Admin"]
+  const navbarLinks = ["/machines", "/cauldrons", "/admin/login"]
 
   return (
     <nav
@@ -50,16 +75,17 @@ const Navbar = ({ isHome }) => {
         className={classnames("navbar-menu", isActive === true && "is-active")}
         data-target="navbar">
         <div id="navbar" className="navbar-end is-size-5 has-text-centered">
-          <Link
-            className="navbar-item has-text-white has-text-weight-bold"
-            to="/machines">
-            Machines
-          </Link>
-          <Link
-            className="navbar-item has-text-white has-text-weight-bold"
-            to="/admin/login">
-            Admin
-          </Link>
+          {navbarText.map((text, index) => (
+            <Link
+              key={index}
+              className={classnames(
+                "navbar-item has-text-white",
+                activeTab === text && "has-text-weight-bold"
+              )}
+              to={navbarLinks[index]}>
+              {text}
+            </Link>
+          ))}
           {isLoggedIn && (
             <Button text="Logout" color="black" onClick={handleLogout} />
           )}

@@ -14,11 +14,7 @@ const Home = () => {
       <div className="hero-section">
         <img src={hzdLogo} alt="logo" />
         <div className="field is-grouped mt-1 is-hidden-desktop">
-          <Button
-            text="View Machine Catalogue"
-            color="black"
-            link="/machines"
-          />
+          <Button text="Machines" color="info" link="/machines" />
         </div>
       </div>
     </Layout>

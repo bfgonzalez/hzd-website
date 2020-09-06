@@ -8,7 +8,9 @@ $family-secondary: "Montserrat", sans-serif;
 
 // Initial variables
 $blue: #028090;
-$light-blue: #29cdfb;
+$light-blue: #61dafb;
+$teal: #4ecdc4;
+$navy-blue: #20232a;
 $yellow: #f8961e;
 $black: #424242;
 $grey: #9a9595;
@@ -17,20 +19,25 @@ $white: #ffffff;
 $custom-colors: $blue, $light-blue, $black, $grey, $white, $yellow;
 
 // Derived variables
-$primary: $blue;
+$primary: $navy-blue;
 $secondary: $yellow;
 $text: $black;
 $footer-background-color: transparent;
 $footer-padding: 1rem;
 $link: $primary;
+$success: $teal;
 
 // For margin and padding
 $spacer: 0.6rem;
 
 // navbar
 $navbar-burger-color: $white;
-$navbar-background-color: $primary;
+$navbar-background-color: transparent;
 $navbar-item-hover-background-color: $black;
+
+// input
+$input-color: $black;
+$input-border-color: red;
 
 // landing page
 .hero-section {
@@ -47,7 +54,8 @@ $navbar-item-hover-background-color: $black;
 
 // pages for machines, login, add machine
 .machines-section,
-.machine-details-section {
+.machine-details-section,
+.cauldrons-section {
   min-height: 100vh;
   width: 90vw;
   margin: 0 auto;
@@ -70,6 +78,13 @@ $navbar-item-hover-background-color: $black;
   justify-content: center;
   padding: 8rem 0;
   margin: 0 auto;
+}
+
+.login-section img {
+  width: 5rem;
+  height: 5rem;
+  display: block;
+  margin: auto;
 }
 
 .loading-indicator {

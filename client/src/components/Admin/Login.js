@@ -85,7 +85,7 @@ const Login = ({ handleLogin }) => {
             <Button
               text="Login"
               type="submit"
-              color="black"
+              color="info"
               onClick={handleSubmit}
             />
           </form>

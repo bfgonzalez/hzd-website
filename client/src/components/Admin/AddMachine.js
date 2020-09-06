@@ -53,7 +53,7 @@ const AddMachine = () => {
         console.log(error.message)
       } else {
         axios
-          .post(process.env.REACT_APP_API_URL, data, {
+          .post(`${process.env.REACT_APP_API_URL}/machines`, data, {
             headers: {
               "content-type": "application/json",
             },
@@ -173,7 +173,7 @@ const AddMachine = () => {
             <Button text="Cancel" link="/admin/machines" />
             <Button
               text="Add Machine"
-              color="success"
+              color="info"
               type="submit"
               onClick={handleSubmit}
             />
