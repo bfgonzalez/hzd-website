@@ -1,5 +1,7 @@
-const machines = require('./machines');
+const machines = require("./machines")
+const cauldrons = require("./cauldrons")
 
 module.exports = {
-  machines
-};
+  machines,
+  cauldrons,
+}
