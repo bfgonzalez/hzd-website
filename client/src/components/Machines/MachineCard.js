@@ -14,7 +14,7 @@ const MachineCard = ({ data, index, isAdmin }) => {
     window.confirm(
       `Are you sure you want to delete ${machineName} from the database?`
     ) &&
-      axios.delete(`${process.env.REACT_APP_API_URL}/${data.id}`).then(() => {
+      axios.delete(`${process.env.REACT_APP_API_URL}/machines/${data.id}`).then(() => {
         toast({
           message: `<strong>${data.name} has been removed from the machines database!</strong>`,
           duration: 3000,

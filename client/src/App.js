@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
-import SEO from "./components/SEO/SEO"
 import Home from "./components/Home/Home"
 import Machines from "./components/Machines/Machines"
+import Cauldrons from "./components/Cauldrons/Cauldrons"
 import Login from "./components/Admin/Login"
 import AdminPanel from "./components/Admin/AdminPanel"
 import AddMachine from "./components/Admin/AddMachine"
@@ -24,7 +24,6 @@ const App = () => {
 
   return (
     <BrowserRouter basename="/">
-      <SEO />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
@@ -33,6 +32,15 @@ const App = () => {
             <>
               <Route path={`${url}`} component={Machines} exact />
               <Route path={`${url}/:name`} component={MachineDetails} />
+            </>
+          )}
+        />
+        <Route
+          path="/cauldrons"
+          render={({ match: { url } }) => (
+            <>
+              <Route path={`${url}`} component={Cauldrons} exact />
+              {/* <Route path={`${url}/:name`} component={MachineDetails} /> */}
             </>
           )}
         />

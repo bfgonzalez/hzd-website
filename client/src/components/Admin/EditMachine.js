@@ -36,25 +36,27 @@ const EditMachine = ({ match }) => {
 
   // get machine info based on id
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/id/${id}`).then((response) => {
-      let machine = response.data
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/machines/id/${id}`)
+      .then((response) => {
+        let machine = response.data
 
-      setValues({
-        id: machine.id,
-        name: machine.name || "",
-        size: machine.size || "",
-        origin: machine.origin || "",
-        override: machine.override || "",
-        machine_class: machine.machine_class || "",
-        machine_sites: machine.machine_sites || 0,
-        weakness: machine.weakness || "",
-        strength: machine.strength || "",
-        weak_points: machine.weak_points || "",
-        explosive_components: machine.explosive_components || "",
-        created_at: machine.created_at || "",
-        updated_at: moment(currentDate).format("MM-DD-YYYY"),
+        setValues({
+          id: machine.id,
+          name: machine.name || "",
+          size: machine.size || "",
+          origin: machine.origin || "",
+          override: machine.override || "",
+          machine_class: machine.machine_class || "",
+          machine_sites: machine.machine_sites || 0,
+          weakness: machine.weakness || "",
+          strength: machine.strength || "",
+          weak_points: machine.weak_points || "",
+          explosive_components: machine.explosive_components || "",
+          created_at: machine.created_at || "",
+          updated_at: moment(currentDate).format("MM-DD-YYYY"),
+        })
       })
-    })
     // eslint-disable-next-line
   }, [id])
 
@@ -81,7 +83,7 @@ const EditMachine = ({ match }) => {
         console.log(error.message)
       } else {
         axios
-          .put(`${process.env.REACT_APP_API_URL}/${data.id}`, data, {
+          .put(`${process.env.REACT_APP_API_URL}/machines/${data.id}`, data, {
             headers: {
               "content-type": "application/json",
             },
@@ -201,7 +203,7 @@ const EditMachine = ({ match }) => {
             <Button text="Cancel" link="/admin/machines" />
             <Button
               text="Edit Machine"
-              color="success"
+              color="info"
               type="submit"
               onClick={handleSubmit}
             />
