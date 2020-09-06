@@ -1,64 +1,60 @@
-'use strict';
-
-const sequelize = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
-  const Machines = sequelize.define('machines', {
+  const Machines = sequelize.define("machines", {
     id: {
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     size: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     origin: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     override: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     machine_class: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     machine_sites: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     weakness: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     strength: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     weak_points: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     explosive_components: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     created_at: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     updated_at: {
       allowNull: false,
-      type: DataTypes.DATE
-    }
-  });
+      type: DataTypes.DATE,
+    },
+  })
 
-  return Machines;
-};
+  return Machines
+}
