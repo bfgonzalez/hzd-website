@@ -1,15 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import moment from "moment"
 import { useHistory } from "react-router-dom"
 import { toast } from "bulma-toast"
-import Joi from "joi-browser"
 
 import Layout from "../Template/Layout"
 import FormInput from "../Template/FormInput"
 import Button from "../Template/Button"
-
-import { machinesValidationSchema } from "../../validationSchema"
 
 const AddMachine = () => {
   const currentDate = new Date()
@@ -30,14 +27,6 @@ const AddMachine = () => {
     updated_at: moment(currentDate).format("MM-DD-YYYY"),
   })
 
-  const handleInputBlur = () => {
-    Joi.validate(values, machinesValidationSchema, (error) => {
-      if (error) {
-        console.log(error.message)
-      }
-    })
-  }
-
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setValues({ ...values, [name]: value })
@@ -48,30 +37,34 @@ const AddMachine = () => {
 
     let data = values
 
-    Joi.validate(values, machinesValidationSchema, (error) => {
-      if (error) {
-        console.log(error.message)
-      } else {
-        axios
-          .post(`${process.env.REACT_APP_API_URL}/machines`, data, {
-            headers: {
-              "content-type": "application/json",
-            },
+    // proceed to POST request if there are no empty values
+    if (!Object.values(data).includes("")) {
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/machines`, data, {
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+        .then(() => {
+          toast({
+            message: `<strong>${data.name} has been added to the machines database!</strong>`,
+            duration: 3000,
+            type: "is-success",
+            dismissible: true,
           })
-          .then(() => {
-            toast({
-              message: `<strong>${data.name} has been added to the machines database!</strong>`,
-              duration: 3000,
-              type: "is-success",
-              dismissible: true,
-            })
-            setTimeout(() => {
-              history.push("/admin/machines")
-            }, 1000)
-          })
-          .catch((error) => console.log(error))
-      }
-    })
+          setTimeout(() => {
+            history.push("/admin/machines")
+          }, 1000)
+        })
+        .catch((error) => console.log(error))
+    } else {
+      toast({
+        message: `<strong>Unable to add machine, form is incomplete 😢</strong>`,
+        duration: 3000,
+        type: "is-danger",
+        dismissible: true,
+      })
+    }
   }
 
   return (
@@ -83,91 +76,81 @@ const AddMachine = () => {
             name="name"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.name}
-            required
+            isRequired
           />
           <FormInput
             name="size"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.size}
-            required
+            isRequired
           />
           <FormInput
             name="origin"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.origin}
-            required
+            isRequired
           />
           <FormInput
             name="override"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.override}
-            required
+            isRequired
           />
           <FormInput
             name="machine_class"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.machine_class}
-            required
+            isRequired
           />
           <FormInput
             name="machine_sites"
             type="number"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.machine_sites}
-            required
+            isRequired
           />
           <FormInput
             name="weakness"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.weakness}
-            required
+            isRequired
           />
           <FormInput
             name="strength"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.strength}
-            required
+            isRequired
           />
           <FormInput
             name="weak_points"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.weak_points}
-            required
+            isRequired
           />
           <FormInput
             name="explosive_components"
             type="text"
             hasLabel
-            onBlur={handleInputBlur}
             onChange={handleInputChange}
             value={values.explosive_components}
-            required
+            isRequired
           />
           <div className="field is-grouped mt-5">
             <Button text="Cancel" link="/admin/machines" />
