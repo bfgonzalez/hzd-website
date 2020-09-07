@@ -1,12 +1,5 @@
 import Joi from "joi-browser"
 
-const loginValidationSchema = Joi.object()
-  .keys({
-    username: Joi.string().required().error(Error("Username is required")),
-    password: Joi.string().required().error(Error("Password is required")),
-  })
-  .options({ abortEarly: false })
-
 const machinesValidationSchema = Joi.object()
   .keys({
     name: Joi.string().required().error(Error("Name is required")),
@@ -33,4 +26,4 @@ const machinesValidationSchema = Joi.object()
   })
   .options({ abortEarly: false })
 
-export { loginValidationSchema, machinesValidationSchema }
+export { machinesValidationSchema }
