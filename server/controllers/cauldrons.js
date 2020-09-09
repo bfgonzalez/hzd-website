@@ -66,10 +66,33 @@ module.exports = {
             rewards: rewards,
             id: id,
             created_at: created_at,
+            updated_at: updated_at,
           })
           .then(() => response.status(200).send(cauldron))
           .catch((error) => response.status(400).send(error.message))
       })
       .catch((error) => response.status(400).send(error.message))
+  },
+
+  // delete cauldron by id
+  delete(request, response) {
+    return models.cauldrons
+      .findOne({
+        where: {
+          id: request.params.id,
+        },
+      })
+      .then((cauldron) => {
+        if (!cauldron) {
+          return response.status(400).send("Cauldron not found")
+        }
+        return cauldron
+          .destroy()
+          .then(() =>
+            response.status(200).send("Cauldron deleted successfully")
+          )
+          .catch((error) => response.status(400).send(error))
+      })
+      .catch((error) => response.status(400).send(error))
   },
 }
