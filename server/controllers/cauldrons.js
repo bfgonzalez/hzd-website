@@ -36,4 +36,40 @@ module.exports = {
       .then((cauldron) => response.json(cauldron))
       .catch((error) => console.log(error))
   },
+
+  // update cauldron by id
+  update(request, response) {
+    const {
+      name,
+      location,
+      enemies,
+      rewards,
+      id,
+      created_at,
+      updated_at,
+    } = request.body
+    return models.cauldrons
+      .findOne({
+        where: {
+          id: request.params.id,
+        },
+      })
+      .then((cauldron) => {
+        if (!cauldron) {
+          return response.status(400).send("Cauldron not found")
+        }
+        return cauldron
+          .update({
+            name: name,
+            location: location,
+            enemies: enemies,
+            rewards: rewards,
+            id: id,
+            created_at: created_at,
+          })
+          .then(() => response.status(200).send(cauldron))
+          .catch((error) => response.status(400).send(error.message))
+      })
+      .catch((error) => response.status(400).send(error.message))
+  },
 }
