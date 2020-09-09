@@ -16,4 +16,5 @@ module.exports = (app) => {
   // cauldrons
   app.get("/api/cauldrons", cauldronsController.list)
   app.post("/api/cauldrons", cauldronsController.create)
+  app.put("/api/cauldrons/:id", cauldronsController.update)
 }
