@@ -37,7 +37,7 @@ module.exports = {
   },
 
   // filter list based on query params
-  filterList(request, response) {
+  filter(request, response) {
     return models.machines
       .findAll({
         where: request.query,

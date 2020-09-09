@@ -12,6 +12,29 @@ module.exports = {
       .catch((error) => response.status(400).send(error.message))
   },
 
+  // retrieve cauldron by id
+  retrieve(request, response) {
+    return models.cauldrons
+      .findOne({
+        where: {
+          id: request.params.id,
+        },
+      })
+      .then((cauldron) => response.status(200).send(cauldron))
+      .catch((error) => response.status(400).send(error.message))
+  },
+
+  // filter cauldrons by query params
+  filter(request, response) {
+    return models.cauldrons
+      .findAll({
+        where: request.query,
+        order: [["id", "ASC"]],
+      })
+      .then((cauldrons) => response.status(200).send(cauldrons))
+      .catch((error) => response.status(400).send(error.message))
+  },
+
   // add cauldron to database
   create(request, response) {
     const {
