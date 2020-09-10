@@ -25,6 +25,15 @@ const Cauldrons = ({ isAdmin }) => {
     <Layout>
       <div className="cauldrons-section">
         <h1 className="has-text-white title is-inline">Cauldrons</h1>
+        {isAdmin && (
+          <div className="is-pulled-right">
+            <Button
+              text="Add Cauldron"
+              color="info"
+              link="/admin/add-cauldron"
+            />
+          </div>
+        )}
         {isLoading ? (
           <div className="loading-indicator columns is-centered is-mobile is-vcentered">
             <Loader type="Oval" color="#29cdfb" height={100} width={100} />

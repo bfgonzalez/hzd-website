@@ -2,13 +2,15 @@ import React from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
 import Home from "./components/Home/Home"
-import Machines from "./components/Machines/Machines"
-import Cauldrons from "./components/Cauldrons/Cauldrons"
 import Login from "./components/Admin/Login"
 import AdminPanel from "./components/Admin/AdminPanel"
-import AddMachine from "./components/Admin/AddMachine"
-import EditMachine from "./components/Admin/EditMachine"
+import Machines from "./components/Machines/Machines"
+import AddMachine from "./components/Machines/AddMachine"
+import EditMachine from "./components/Machines/EditMachine"
 import MachineDetails from "./components/Machines/MachineDetails"
+
+import Cauldrons from "./components/Cauldrons/Cauldrons"
+import AddCauldron from "./components/Cauldrons/AddCauldron"
 
 import ProtectedRoute from "./components/Template/ProtectedRoute"
 
@@ -41,11 +43,7 @@ const App = () => {
             <>
               <Route exact path={`${url}/login`} render={() => <Login />} />
               <ProtectedRoute path={`${url}/panel`} component={AdminPanel} />
-              <ProtectedRoute
-                path={`${url}/machines`}
-                component={Machines}
-                isAdmin
-              />
+              <ProtectedRoute path={`${url}/machines`} component={Machines} />
               <ProtectedRoute
                 path={`${url}/add-machine`}
                 component={AddMachine}
@@ -55,6 +53,10 @@ const App = () => {
                 component={EditMachine}
               />
               <ProtectedRoute path={`${url}/cauldrons`} component={Cauldrons} />
+              <ProtectedRoute
+                path={`${url}/add-cauldron`}
+                component={AddCauldron}
+              />
             </>
           )}
         />

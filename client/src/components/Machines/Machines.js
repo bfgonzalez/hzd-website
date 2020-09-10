@@ -25,6 +25,7 @@ const Machines = ({ isAdmin }) => {
         }
         // if search bar is not empty, filter machines based on input value
         else {
+          // eslint-disable-next-line
           machines.filter((machine) => {
             let search = searchTerm.toLowerCase()
             let values = Object.values(machine) // get values of each machine object
