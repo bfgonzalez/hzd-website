@@ -1,5 +1,4 @@
 import React from "react"
-import Machines from "../Machines/Machines"
 
 import Layout from "../Template/Layout"
 import Button from "../Template/Button"
