@@ -41,7 +41,9 @@ const Cauldrons = ({ isAdmin }) => {
         ) : (
           <div className="columns is-multiline mt-2">
             {cauldrons.map((cauldron, index) => (
-              <div className="column is-half" key={index}>
+              <div
+                className="column is-one-third-desktop is-half-tablet"
+                key={index}>
                 <CauldronCard data={cauldron} index={index} isAdmin={isAdmin} />
               </div>
             ))}
