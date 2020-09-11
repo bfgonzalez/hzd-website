@@ -99,7 +99,7 @@ const EditMachine = ({ match }) => {
 
   return (
     <Layout>
-      <div className="edit-machine-section">
+      <div className="form-section">
         <h1 className="title has-text-white">Edit Machine</h1>
         <form onSubmit={handleSubmit} name="editMachineForm">
           <FormInput
@@ -183,7 +183,7 @@ const EditMachine = ({ match }) => {
             isRequired
           />
           <div className="field is-grouped mt-5">
-            <Button text="Cancel" link="/admin/machines" />
+            <Button text="Cancel" link="/admin/cauldrons" />
             <Button
               text="Edit Machine"
               color="info"

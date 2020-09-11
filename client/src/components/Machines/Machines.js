@@ -54,7 +54,7 @@ const Machines = ({ isAdmin }) => {
 
   return (
     <Layout>
-      <div className="machines-section">
+      <div className="data-section">
         <h1 className="has-text-white title is-inline">Machines</h1>
         {isAdmin && (
           <div className="is-pulled-right">

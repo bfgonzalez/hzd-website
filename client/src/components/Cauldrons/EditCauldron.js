@@ -1,16 +1,20 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import moment from "moment"
-import { useHistory } from "react-router-dom"
+import { useHistory, withRouter } from "react-router-dom"
 import { toast } from "bulma-toast"
 
 import Layout from "../Template/Layout"
 import FormInput from "../Template/FormInput"
 import Button from "../Template/Button"
 
-const AddCauldron = () => {
+const EditCauldron = ({ match }) => {
   const currentDate = new Date()
   const history = useHistory()
+
+  const {
+    params: { id },
+  } = match
 
   const [values, setValues] = useState({
     name: "",
@@ -20,6 +24,25 @@ const AddCauldron = () => {
     created_at: moment(currentDate).format("MM-DD-YYYY"),
     updated_at: moment(currentDate).format("MM-DD-YYYY"),
   })
+
+  // get cauldron info based on id
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/cauldrons/id/${id}`)
+      .then((response) => {
+        let cauldron = response.data
+
+        setValues({
+          id: cauldron.id,
+          name: cauldron.name || "",
+          location: cauldron.location || "",
+          enemies: cauldron.enemies || "",
+          rewards: cauldron.rewards || "",
+          created_at: cauldron.created_at || "",
+          updated_at: moment(currentDate).format("MM-DD-YYYY"),
+        })
+      })
+  }, [id])
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
@@ -31,13 +54,17 @@ const AddCauldron = () => {
 
     let data = values
 
-    // proceed to POST request if there are no empty values
+    // proceed to PUT request if there are no empty values
     if (!Object.values(data).includes("")) {
       axios
-        .post(`${process.env.REACT_APP_API_URL}/cauldrons`, data)
+        .put(`${process.env.REACT_APP_API_URL}/cauldrons/${id}`, data, {
+          headers: {
+            "content-type": "application/json",
+          },
+        })
         .then(() => {
           toast({
-            message: `<strong>${data.name} has been added to the cauldrons database!</strong>`,
+            message: `<strong>${data.name} has been updated!</strong>`,
             duration: 3000,
             type: "is-success",
             dismissible: true,
@@ -49,19 +76,18 @@ const AddCauldron = () => {
         .catch((error) => console.log(error))
     } else {
       toast({
-        message: `<strong>Unable to add cauldron, form is incomplete 😢</strong>`,
+        message: `<strong>Unable to edit cauldron, form is incomplete 😢</strong>`,
         duration: 3000,
         type: "is-danger",
         dismissible: true,
       })
     }
   }
-
   return (
     <Layout>
       <div className="form-section">
-        <h1 className="title has-text-white">Add Cauldron</h1>
-        <form onSubmit={handleSubmit} name="addCauldronForm">
+        <h1 className="title has-text-white">Edit Cauldron</h1>
+        <form onSubmit={handleSubmit} bane="editCauldronForm">
           <FormInput
             name="name"
             type="text"
@@ -95,9 +121,9 @@ const AddCauldron = () => {
             isRequired
           />
           <div className="field is-grouped mt-5">
-            <Button text="Cancel" link="/admin/cauldrons" />
+            <Button text="Cancel" link="/admin/machines" />
             <Button
-              text="Add Cauldron"
+              text="Edit Cauldron"
               color="info"
               type="submit"
               onClick={handleSubmit}
@@ -109,4 +135,4 @@ const AddCauldron = () => {
   )
 }
 
-export default AddCauldron
+export default withRouter(EditCauldron)

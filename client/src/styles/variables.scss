@@ -60,11 +60,8 @@ $input-border-color: red;
   font-size: calc(10px + 2vmin);
 }
 
-// pages for machines, login, add machine
-.machines-section,
-.machine-details-section,
-.cauldrons-section,
-.cauldron-details-section {
+// pages for machines and cauldrons
+.data-section {
   min-height: 100vh;
   width: 90vw;
   margin: 0 auto;
@@ -81,9 +78,7 @@ $input-border-color: red;
   margin-left: -1rem;
 }
 
-.add-machine-section,
-.edit-machine-section,
-.add-cauldron-section {
+.form-section {
   height: auto;
   width: 60vw;
   display: flex;
