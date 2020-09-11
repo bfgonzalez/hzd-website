@@ -11,6 +11,7 @@ import MachineDetails from "./components/Machines/MachineDetails"
 
 import Cauldrons from "./components/Cauldrons/Cauldrons"
 import AddCauldron from "./components/Cauldrons/AddCauldron"
+import CauldronDetails from "./components/Cauldrons/CauldronDetails"
 
 import ProtectedRoute from "./components/Template/ProtectedRoute"
 
@@ -33,7 +34,7 @@ const App = () => {
           render={({ match: { url } }) => (
             <>
               <Route path={`${url}`} component={Cauldrons} exact />
-              {/* <Route path={`${url}/:name`} component={CauldronDetails} /> */}
+              <Route path={`${url}/:name`} component={CauldronDetails} />
             </>
           )}
         />

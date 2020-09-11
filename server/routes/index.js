@@ -1,6 +1,5 @@
 const machinesController = require("../controllers/machines")
 const cauldronsController = require("../controllers/cauldrons")
-const api = require("../controllers/views")
 
 // setup endpoints
 module.exports = (app) => {
