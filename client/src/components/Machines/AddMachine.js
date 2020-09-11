@@ -69,7 +69,7 @@ const AddMachine = () => {
 
   return (
     <Layout>
-      <div className="add-machine-section">
+      <div className="form-section">
         <h1 className="title has-text-white">Add Machine</h1>
         <form onSubmit={handleSubmit} name="addMachineForm">
           <FormInput

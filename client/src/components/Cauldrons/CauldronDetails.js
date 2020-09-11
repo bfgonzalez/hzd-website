@@ -54,7 +54,7 @@ const CauldronDetails = ({ match }) => {
 
   return (
     <Layout>
-      <div className="cauldron-details-section">
+      <div className="data-section">
         <div className="columns is-centered is-vcentered">
           <div className="column is-8 is-12-mobile has-text-centered">
             <h1 className="title has-text-white">{cauldronName}</h1>
