@@ -1,14 +1,20 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
-import { useHistory } from "react-router-dom"
+import moment from "moment"
+import { useHistory, withRouter } from "react-router-dom"
 import { toast } from "bulma-toast"
 
 import FormInput from "./FormInput"
 import Button from "../Button"
 
-const AddForm = ({ type, initialValues }) => {
+const EditForm = ({ match, type, initialValues }) => {
   const [formValues, setFormValues] = useState(initialValues)
+  const currentDate = new Date()
   const history = useHistory()
+
+  const {
+    params: { id },
+  } = match
 
   // get keys from initialValues object and return in an array
   const formKeys = Object.keys(initialValues)
@@ -18,9 +24,23 @@ const AddForm = ({ type, initialValues }) => {
   // slug for endpoint ex: if type is Cauldron, slug = cauldrons
   const slug = `${type.toLowerCase()}s`
 
+  // get info based on id
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/${slug}/id/${id}`)
+      .then((response) => {
+        let data = response.data
+        setFormValues(data)
+      })
+  }, [id, slug])
+
   const handleInputChange = (event) => {
     const { name, value } = event.target
-    setFormValues({ ...formValues, [name]: value })
+    const formData = { ...formValues }
+
+    // assign value of date today to updated_at key
+    formData.updated_at = moment(currentDate).format("MM-DD-YYYY")
+    setFormValues({ ...formData, [name]: value })
   }
 
   const handleSubmit = (event) => {
@@ -28,13 +48,17 @@ const AddForm = ({ type, initialValues }) => {
 
     let data = formValues
 
-    // proceed to POST request if there are no empty values
+    // proceed to PUT request if there are no empty values
     if (!Object.values(data).includes("")) {
       axios
-        .post(`${process.env.REACT_APP_API_URL}/${slug}`, data)
+        .put(`${process.env.REACT_APP_API_URL}/${slug}/${data.id}`, data, {
+          headers: {
+            "content-type": "application/json",
+          },
+        })
         .then(() => {
           toast({
-            message: `<strong>${data.name} has been added to the ${slug} database!</strong>`,
+            message: `<strong>${data.name} has been updated!</strong>`,
             duration: 3000,
             type: "is-success",
             dismissible: true,
@@ -46,7 +70,7 @@ const AddForm = ({ type, initialValues }) => {
         .catch((error) => console.log(error))
     } else {
       toast({
-        message: `<strong>Unable to add ${type.toLowerCase}, form is incomplete 😢</strong>`,
+        message: `<strong>Unable to edit ${data.name}, form is incomplete 😢</strong>`,
         duration: 3000,
         type: "is-danger",
         dismissible: true,
@@ -56,8 +80,8 @@ const AddForm = ({ type, initialValues }) => {
 
   return (
     <div className="form-section">
-      <h1 className="title has-text-white"> Add {type}</h1>
-      <form onSubmit={handleSubmit} name={`add${type}Form`}>
+      <h1 className="title has-text-white">Edit {type}</h1>
+      <form onSubmit={handleSubmit} name={`edit${type}Form`}>
         {formKeys.map((formKey, index) => (
           <FormInput
             key={index}
@@ -72,7 +96,7 @@ const AddForm = ({ type, initialValues }) => {
         <div className="field is-grouped mt-5">
           <Button text="Cancel" link={`/admin/${slug}`} />
           <Button
-            text={`Add ${type}`}
+            text={`Edit ${type}`}
             color="info"
             type="submit"
             onClick={handleSubmit}
@@ -83,4 +107,4 @@ const AddForm = ({ type, initialValues }) => {
   )
 }
 
-export default AddForm
+export default withRouter(EditForm)
