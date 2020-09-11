@@ -9,6 +9,26 @@ const CauldronCard = ({ data, index, isAdmin }) => {
   const cauldronName = data.name.replace(/\s+/g, "-")
   const cauldronImage = cauldronName.toLowerCase()
 
+  // only call this function after confirmation
+  const deleteCauldron = () => {
+    window.confirm(
+      `Are you sure you want to delete ${data.name} from the database?`
+    ) &&
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/cauldrons/${data.id}`)
+        .then(() => {
+          toast({
+            message: `<strong>${data.name} has been removed from the cauldrons database!</strong>`,
+            duration: 3000,
+            type: "is-success",
+            dismissible: true,
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
+        })
+  }
+
   return (
     <div className="cauldron-card" key={index}>
       <div className="card">
@@ -40,7 +60,9 @@ const CauldronCard = ({ data, index, isAdmin }) => {
                   color="warning"
                   link={`/admin/edit-cauldron/${data.id}`}
                 />
-                <button className="button is-danger has-text-weight-bold">
+                <button
+                  className="button is-danger has-text-weight-bold"
+                  onClick={deleteCauldron}>
                   Delete
                 </button>
               </>
