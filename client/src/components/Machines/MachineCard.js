@@ -12,7 +12,7 @@ const MachineCard = ({ data, index, isAdmin }) => {
   // only call this function after confirmation
   const deleteMachine = () => {
     window.confirm(
-      `Are you sure you want to delete ${machineName} from the database?`
+      `Are you sure you want to delete ${data.name} from the database?`
     ) &&
       axios
         .delete(`${process.env.REACT_APP_API_URL}/machines/${data.id}`)
