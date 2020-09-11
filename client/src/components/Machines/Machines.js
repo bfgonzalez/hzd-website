@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import Loader from "react-loader-spinner"
 
-import Layout from "../Template/Layout"
 import MachineCard from "./MachineCard"
+import Layout from "../Template/Layout"
+import FormInput from "../Template/Forms/FormInput"
 import Button from "../Template/Button"
 
 const Machines = ({ isAdmin }) => {
@@ -61,17 +62,13 @@ const Machines = ({ isAdmin }) => {
             <Button text="Add Machine" color="info" link="/admin/add-machine" />
           </div>
         )}
-        <div className="field mt-4">
-          <div className="control">
-            <input
-              className="input is-primary"
-              name="search"
-              type="text"
-              onChange={handleInputChange}
-              value={searchTerm}
-              placeholder="Search Machines"
-            />
-          </div>
+        <div className="mt-4">
+          <FormInput
+            name="search"
+            type="text"
+            onChange={handleInputChange}
+            value={searchTerm}
+          />
         </div>
         {isLoading ? (
           <div className="loading-indicator columns is-centered is-mobile is-vcentered">

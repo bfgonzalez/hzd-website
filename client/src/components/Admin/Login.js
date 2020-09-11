@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
 
 import Layout from "../Template/Layout"
-import FormInput from "../Template/FormInput"
+import FormInput from "../Template/Forms/FormInput"
 import Button from "../Template/Button"
 
 const Login = () => {

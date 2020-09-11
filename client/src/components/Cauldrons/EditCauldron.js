@@ -5,7 +5,7 @@ import { useHistory, withRouter } from "react-router-dom"
 import { toast } from "bulma-toast"
 
 import Layout from "../Template/Layout"
-import FormInput from "../Template/FormInput"
+import FormInput from "../Template/Forms/FormInput"
 import Button from "../Template/Button"
 
 const EditCauldron = ({ match }) => {
