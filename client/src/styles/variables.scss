@@ -16,11 +16,14 @@ $black: #424242;
 $grey: #9a9595;
 $white: #ffffff;
 
-$custom-colors: $blue, $light-blue, $black, $grey, $white, $yellow;
+$custom-colors: (
+    "secondary": $teal,
+  ),
+  $blue, $light-blue, $teal, $black, $grey, $white, $yellow;
 
 // Derived variables
 $primary: $navy-blue;
-$secondary: $yellow;
+$secondary: $teal;
 $text: $black;
 $footer-background-color: transparent;
 $footer-padding: 1rem;
@@ -32,7 +35,9 @@ $spacer: 0.6rem;
 // navbar
 $navbar-burger-color: $white;
 $navbar-background-color: transparent;
-$navbar-item-hover-background-color: $black;
+$navbar-item-color: $white;
+$navbar-item-hover-color: $teal;
+$navbar-item-hover-background-color: $primary;
 
 // input
 $input-color: $black;

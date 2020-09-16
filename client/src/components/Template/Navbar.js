@@ -56,9 +56,7 @@ const Navbar = ({ isHome }) => {
       )}
       role="navigation">
       <div className="navbar-brand">
-        <Link
-          className="navbar-item has-text-weight-bold has-text-white is-size-4"
-          to="/">
+        <Link className="navbar-item has-text-weight-bold  is-size-4" to="/">
           HORIZON ZERO DAWN
         </Link>
         <div className="navbar-burger" onClick={() => setActive(!isActive)}>
@@ -75,8 +73,8 @@ const Navbar = ({ isHome }) => {
             <Link
               key={index}
               className={classnames(
-                "navbar-item has-text-white",
-                activeTab === text && "has-text-weight-bold"
+                "navbar-item ",
+                activeTab === text && "has-text-weight-bold has-text-info"
               )}
               to={navbarLinks[index]}>
               {text}
