@@ -34,6 +34,9 @@ const Cauldrons = ({ isAdmin }) => {
             />
           </div>
         )}
+        {/* fixes centering problem for loading indicator */}
+        <div className="mt-4" />
+
         {isLoading ? (
           <div className="loading-indicator columns is-centered is-mobile is-vcentered">
             <Loader type="Oval" color="#29cdfb" height={100} width={100} />
