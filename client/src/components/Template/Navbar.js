@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
+import { toast } from "bulma-toast"
 import classnames from "classnames"
+import firebase from "firebase/app"
 
 import Button from "./Button"
 
@@ -8,16 +10,34 @@ const Navbar = ({ isHome }) => {
   const [isActive, setActive] = useState(false)
   const [activeTab, setActiveTab] = useState("")
   const [navbarLinks, setNavbarLinks] = useState(["/machines", "/cauldrons"])
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const history = useHistory()
 
-  const isAuthenticated = sessionStorage.getItem("isAuthenticated")
-
+  // check if user is logged in
   useEffect(() => {
+    let isMounted = true // note: this flag denotes mount status
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (
+        isMounted &&
+        user &&
+        user.uid === process.env.REACT_APP_FIREBASE_UID
+      ) {
+        setIsAuthenticated(true)
+      } else {
+        setIsAuthenticated(false)
+      }
+    })
+
     if (isAuthenticated) {
       setNavbarLinks(["/admin/machines", "/admin/cauldrons"])
     } else {
       setNavbarLinks(["/machines", "/cauldrons"])
+    }
+
+    return () => {
+      isMounted = false // useEffect cleanup to set isMounted flag to false
     }
   }, [isAuthenticated])
 
@@ -42,7 +62,13 @@ const Navbar = ({ isHome }) => {
   }, [activeTab])
 
   const handleLogout = () => {
-    sessionStorage.removeItem("isAuthenticated")
+    firebase.auth().signOut()
+    toast({
+      message: `<strong>Logout successful`,
+      duration: 3000,
+      type: "is-success",
+      dismissible: true,
+    })
     history.push("/")
   }
 
@@ -81,9 +107,9 @@ const Navbar = ({ isHome }) => {
             </Link>
           ))}
           {isAuthenticated ? (
-            <Button text="Logout" color="black" onClick={handleLogout} />
+            <Button text="Admin Logout" color="black" onClick={handleLogout} />
           ) : (
-            <Button text="Login" color="black" link="/admin/login" />
+            <Button text="Admin Login" color="black" link="/admin/login" />
           )}
         </div>
       </div>
