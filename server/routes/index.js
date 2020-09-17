@@ -1,8 +1,18 @@
+const jwt = require("jsonwebtoken")
+const passport = require("passport")
+
+const usersController = require("../controllers/users")
 const machinesController = require("../controllers/machines")
 const cauldronsController = require("../controllers/cauldrons")
 
 // setup endpoints
 module.exports = (app) => {
+  // users
+  app.get("/api/users", usersController.list)
+  app.get("/api/users/id/:id", usersController.retrieve)
+  app.post("/admin/register", usersController.register)
+  app.post("/admin/login", usersController.login)
+
   // machines
   app.get("/api/machines", machinesController.list)
   app.get("/api/machines/id/:id", machinesController.retrieve)
