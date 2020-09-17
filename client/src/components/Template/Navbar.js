@@ -51,7 +51,7 @@ const Navbar = ({ isHome }) => {
   return (
     <nav
       className={classnames(
-        "navbar is-fixed-top is-family-secondary is-spaced is-transparent has-text-centered",
+        "navbar is-fixed-top is-spaced is-transparent has-text-centered",
         !isHome && "has-background-primary"
       )}
       role="navigation">

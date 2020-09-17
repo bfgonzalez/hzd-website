@@ -1,7 +1,7 @@
 const models = require("../models")
 
 module.exports = {
-  // list all machines in database (excluding, create_at & updated_at)
+  // list all machines in database (excluding create_at & updated_at)
   list(request, response) {
     return models.machines
       .findAll({
