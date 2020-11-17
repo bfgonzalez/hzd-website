@@ -11,21 +11,20 @@ const ProtectedRoute = ({ component: Component, isAdmin, ...rest }) => {
   // check if user is logged in
   useEffect(() => {
     let isMounted = true // note: this flag denotes mount status
-    setLoading(true)
 
     firebase.auth().onAuthStateChanged((user) => {
-      if (user && isMounted) {
+      if (isMounted && user) {
         setUserID(user.uid)
         setLoading(false)
-      } else {
-        setUserID("")
+      } else if (!user) {
+        setLoading(false) // removes endless loading screen is no user is signed in
       }
     })
 
     return () => {
       isMounted = false // useEffect cleanup to set isMounted flag to false
     }
-  }, [])
+  }, [isLoading])
 
   return (
     <FirebaseAuthConsumer>
@@ -38,7 +37,8 @@ const ProtectedRoute = ({ component: Component, isAdmin, ...rest }) => {
                 <Loader type="Oval" color="#29cdfb" height={100} width={100} />
               </div>
             )
-          } else if (userID === process.env.REACT_APP_FIREBASE_UID) {
+          }
+          if (!isLoading && userID === process.env.REACT_APP_FIREBASE_UID) {
             return <Component isAdmin />
           } else {
             return (
