@@ -11,8 +11,6 @@ const port = process.env.PORT || 8080
 
 const cors = require("cors")
 
-require("./auth/auth")
-
 app.use(cors())
 app.use(history())
 
