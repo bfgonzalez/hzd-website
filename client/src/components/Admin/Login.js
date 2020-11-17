@@ -1,41 +1,59 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
+import { toast } from "bulma-toast"
+import firebase from "firebase/app"
 
 import Layout from "../Template/Layout"
 import FormInput from "../Template/Forms/FormInput"
 import Button from "../Template/Button"
 
+require("dotenv").config()
+
 const Login = () => {
   const [values, setValues] = useState({
-    username: "",
+    email: "",
     password: "",
   })
 
   const history = useHistory()
-
-  const [authorizationMessage, setAuthorizationMessage] = useState("")
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setValues({ ...values, [name]: value })
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleFirebaseLogin = () => {
+    let data = values
 
-    if (
-      values.username === `${process.env.REACT_APP_USERNAME}` &&
-      values.password === `${process.env.REACT_APP_PASSWORD}`
-    ) {
-      sessionStorage.setItem("isAuthenticated", true)
-      history.push("/admin/panel")
-    } else {
-      sessionStorage.setItem("isAuthenticated", false)
-      setValues({
-        username: "",
-        password: "",
-      })
-      setAuthorizationMessage("Unauthorized User ✋")
+    if (!Object.values(data).includes("")) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(data.email, data.password)
+        .then((user) => {
+          if (
+            user &&
+            firebase.auth().currentUser.uid ===
+              process.env.REACT_APP_FIREBASE_UID
+          ) {
+            toast({
+              message: `<strong>Login successful`,
+              duration: 3000,
+              type: "is-success",
+              dismissible: true,
+            })
+            history.push(`/admin/panel`)
+          } else {
+            toast({
+              message: `<strong>Unauthorized User ✋`,
+              duration: 3000,
+              type: "is-danger",
+              dismissible: true,
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 
@@ -44,12 +62,12 @@ const Login = () => {
       <div className="columns is-centered is-vcentered full-height">
         <div className="login-section column is-4 is-10-mobile">
           <h1 className="title has-text-white">Login</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleFirebaseLogin}>
             <FormInput
-              name="username"
-              type="text"
+              name="email"
+              type="email"
               onChange={handleInputChange}
-              value={values.username}
+              value={values.email}
               isRequired
             />
             <FormInput
@@ -59,14 +77,11 @@ const Login = () => {
               value={values.password}
               isRequired
             />
-            <p className="has-text-white has-text-weight-bold mb-2">
-              {authorizationMessage}
-            </p>
             <Button
-              text="Login"
+              text="Admin Login"
               type="submit"
               color="info"
-              onClick={handleSubmit}
+              onClick={handleFirebaseLogin}
             />
           </form>
         </div>
